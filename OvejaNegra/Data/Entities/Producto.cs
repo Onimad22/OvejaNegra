@@ -17,7 +17,7 @@ namespace OvejaNegra.Data.Entities
         [Display(Name = "Precio Local")]
         public double PrecioLocal { get; set; }
         [Required]
-        [Display(Name = "Precio Mesa")]
+        [Display(Name = "Precio Delivery")]
         public double PrecioDelivery { get; set; }
     }
 }
