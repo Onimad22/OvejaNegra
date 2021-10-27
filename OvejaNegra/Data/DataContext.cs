@@ -1,0 +1,21 @@
+﻿using Microsoft.EntityFrameworkCore;
+using OvejaNegra.Data.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace OvejaNegra.Data
+{
+    public class DataContext:DbContext
+    {
+        public DataContext(DbContextOptions<DataContext>options):base(options)
+        {
+
+        }
+
+        public DbSet<Producto> Productos { get; set; }
+
+    }
+   
+}
