@@ -19,5 +19,10 @@ namespace OvejaNegra.Data.Entities
         [Required]
         [Display(Name = "Precio Delivery")]
         public double PrecioDelivery { get; set; }
+        [Required]
+        [Display(Name = "Categoria")]
+        public string Categoria { get; set; }
+
+        public ICollection<Comanda> Comandas { get; set; }
     }
 }

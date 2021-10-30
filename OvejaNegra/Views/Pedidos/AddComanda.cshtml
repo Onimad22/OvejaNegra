@@ -1,0 +1,59 @@
+﻿@model ComandaViewModel
+@{
+    ViewData["Title"] = "Add Item";
+}
+
+<h1>Add Item</h1>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-action="AddComanda">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PedidoId" />
+            <input type="hidden" asp-for="PedidoDelivery" />
+
+            <div class="form-group">
+                <label asp-for="Cantidad" class="col-form-label"></label>
+                <input asp-for="Cantidad" class="form-control" value="1" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProductoId" class="col-form-label"></label>
+                <select asp-for="ProductoId" asp-items="Model.Productos" class="form-control"></select>
+                <span asp-validation-for="ProductoId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Carne" class="col-form-label"></label>
+                <input asp-for="Carne" class="form-control" value="1"/>
+                <span asp-validation-for="Carne" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Papa" class="col-form-label"></label>
+                <input asp-for="Papa" class="form-control"value="1" />
+                <span asp-validation-for="Papa" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Queso" class="col-form-label"></label>
+                <input asp-for="Queso" class="form-control" value="1" />
+                <span asp-validation-for="Queso" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+                <a asp-action="Details" asp-route-id="@Model.PedidoId" class="btn btn-success">Back to list</a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
