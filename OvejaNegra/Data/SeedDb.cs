@@ -105,8 +105,7 @@ namespace OvejaNegra.Data
                 _context.Pedidos.Add(new Pedido
                 {
                     Mesa = "mesa 1",
-                    Fecha = DateTime.Today,
-                    Hora = DateTime.Now,
+                    Fecha = DateTimeOffset.Now,
                     Pago = true,
                     Cerrado=false,
                     Delivery=true,

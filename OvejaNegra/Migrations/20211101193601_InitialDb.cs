@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OvejaNegra.Migrations
 {
-    public partial class InitialDB : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,7 @@ namespace OvejaNegra.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Mesa = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Hora = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Fecha = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     Pago = table.Column<bool>(type: "bit", nullable: false),
                     Cerrado = table.Column<bool>(type: "bit", nullable: false),
                     Preparando = table.Column<bool>(type: "bit", nullable: false),

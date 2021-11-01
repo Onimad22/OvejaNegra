@@ -59,10 +59,11 @@ namespace OvejaNegra.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Mesa,Delivery")] Pedido model)
         {
-            
 
-            model.Fecha = DateTime.Now;
-            model.Hora = DateTime.Now.ToLocalTime();
+            var fecha = DateTimeOffset.Now;
+            var fechalocal = fecha.ToOffset(new TimeSpan(-4, 0, 0));
+            
+            model.Fecha = fechalocal;
             
             if (ModelState.IsValid)
             {

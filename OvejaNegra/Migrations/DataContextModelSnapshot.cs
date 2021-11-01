@@ -66,11 +66,8 @@ namespace OvejaNegra.Migrations
                     b.Property<bool>("Delivery")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Hora")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("Fecha")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Mesa")
                         .IsRequired()
