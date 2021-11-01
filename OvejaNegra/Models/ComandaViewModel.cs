@@ -12,7 +12,7 @@ namespace OvejaNegra.Models
     {
         public int PedidoId { get; set; }
 
-        [Required]
+        
         [Display(Name = "Producto")]
         [Range(1, int.MaxValue, ErrorMessage = "You must select a Item")]
         public int ProductoId { get; set; }

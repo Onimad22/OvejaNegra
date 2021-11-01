@@ -37,8 +37,7 @@ namespace OvejaNegra.Controllers
                 return NotFound();
             }
 
-            var pedido = await _context.Pedidos.Include(c=>c.Comandas).ThenInclude(p=>p.Producto).Include(e=>e.Comandas).ThenInclude(h=>h.Extra)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var pedido = await _context.Pedidos.Include(c=>c.Comandas).ThenInclude(p=>p.Producto).FirstOrDefaultAsync(m => m.Id == id);
             if (pedido == null)
             {
                 return NotFound();
@@ -58,17 +57,21 @@ namespace OvejaNegra.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Mesa,Delivery,Pago,Cerrado")] Pedido pedido)
+        public async Task<IActionResult> Create([Bind("Mesa,Delivery")] Pedido model)
         {
-            pedido.Fecha = DateTime.Today;
-            pedido.Hora = DateTime.Now;
+            
+            model.Fecha = DateTime.Today;
+            model.Hora = DateTime.Now;
+            
             if (ModelState.IsValid)
             {
-                _context.Add(pedido);
+                _context.Add(model);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction("Details", "Pedidos", new { id = model.Id });
+                //return RedirectToAction(nameof(Index));
             }
-            return View(pedido);
+            return View(model);
         }
 
         // GET: Pedidos/Edit/5
@@ -92,7 +95,7 @@ namespace OvejaNegra.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Mesa,Fecha,Hora,Preparando,,Delivery,Pago,Cerrado")] Pedido pedido)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Mesa,Fecha,Hora,Preparando,Delivery,Pago,Cerrado")] Pedido pedido)
         {
             if (id != pedido.Id)
             {
@@ -190,29 +193,8 @@ namespace OvejaNegra.Controllers
                 comanda.Pedido = await _context.Pedidos.FindAsync(model.PedidoId);
                 comanda.Cantidad = model.Cantidad;
                 comanda.Producto = await _context.Productos.FindAsync(model.ProductoId);
-                comanda.Carne = model.Carne;
-                comanda.Papa = model.Papa;
-                comanda.Queso = model.Queso;
-
-                var categoria = comanda.Producto.Categoria;
-                var cantidadCarne = comanda.Carne;
-                var cantidadQueso = comanda.Queso;
-                var cantidadPapa = comanda.Papa;
-
-                if (categoria=="Hamburguesa")
-                {
-                    cantidadCarne = cantidadCarne - 1;
-                    cantidadQueso = cantidadQueso - 1;
-                }
-                else
-                {
-                    comanda.Carne = 0;
-                    comanda.Queso = 0;
-                    comanda.Papa = 0;
-                    cantidadCarne = 0;
-                    cantidadQueso = 0;
-                    cantidadPapa = 0;
-                }
+                comanda.Vegetariana = model.Vegetariana;
+                comanda.Comentarios = model.Comentarios;
                 
                 var precio = 0.0;
                 
@@ -225,18 +207,8 @@ namespace OvejaNegra.Controllers
                     precio = comanda.Producto.PrecioLocal;
                 }
 
-                var extras = _context.Extras;
 
-                var carne = await extras.FindAsync(4);
-                var ValorCarne = carne.Precio;
-
-                var queso = await extras.FindAsync(3);
-                var ValorQueso = queso.Precio;
-
-                var papa = await extras.FindAsync(2);
-                var ValorPapa = papa.Precio;
-
-                comanda.Total = precio * model.Cantidad + cantidadCarne * ValorCarne + cantidadPapa * ValorPapa + cantidadQueso * ValorQueso;
+                comanda.Total = precio * model.Cantidad;
 
                 _context.Comandas.Add(comanda);
                 await _context.SaveChangesAsync();
@@ -247,5 +219,37 @@ namespace OvejaNegra.Controllers
         }
 
 
+        // GET: Comandas/Delete/5
+        public async Task<IActionResult> DeleteComanda(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var comanda = await _context.Comandas.Include(c => c.Producto).FirstOrDefaultAsync(m => m.Id == id);
+            if (comanda == null)
+            {
+                return NotFound();
+            }
+
+            return View(comanda);
+        }
+
+        // POST: Comandas/Delete/5
+        [HttpPost, ActionName("DeleteComanda")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteComandaConfirmed(int id)
+        {
+            var comanda = await _context.Comandas.Include(c=>c.Pedido).FirstOrDefaultAsync(m => m.Id == id);
+            _context.Comandas.Remove(comanda);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "Pedidos", new { id = comanda.Pedido.Id });
+
+        }
+
     }
+
+
 }
+

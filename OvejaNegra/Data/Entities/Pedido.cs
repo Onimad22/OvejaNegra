@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OvejaNegra.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,9 +21,13 @@ namespace OvejaNegra.Data.Entities
 
         [DataType(DataType.Time)]
         public DateTime Hora { get; set; }
+
         public bool Pago { get; set; }
+
         public bool Cerrado { get; set; }
+
         public bool Preparando { get; set; }
+
         public bool Delivery { get; set; }
 
         public ICollection<Comanda> Comandas { get; set; }

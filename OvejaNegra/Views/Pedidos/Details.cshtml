@@ -26,9 +26,14 @@
     </dl>
 </div>
 <div>
-    <a asp-action="AddComanda" asp-route-id="@Model.Id">Add Item</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="AddComanda" asp-route-id="@Model.Id" class="btn btn-primary">Add Item</a> |
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
+
+
+
+
+
 @if (Model.Comandas.Count == 0)
 {
     <h4>Pedido vacio</h4>
@@ -46,16 +51,13 @@ else
                     Item
                 </th>
                 <th>
-                    C
+                    Veg
                 </th>
                 <th>
-                    P
+                    Coment
                 </th>
                 <th>
-                    Q
-                </th>
-                <th>
-                    $
+                    Total
                 </th>
 
                 <th></th>
@@ -64,79 +66,32 @@ else
         <tbody>
             @foreach (var item in Model.Comandas)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cantidad)
-                </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Producto.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Carne)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Papa)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Queso)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vegetariana)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comentarios)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Total)
-                </td>
-
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Del</a>
-                </td>
-            </tr>
+                    <td>
+                        <a asp-action="EditComanda" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit</a> |
+                        <a asp-action="DeleteComanda" asp-route-id="@item.Id" class="btn btn-outline-warning">Del</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
 
-    //PARA EL TOTAL DE CARNES Y PAPAS
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    
-                </th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            
-           
-            <tr>
-                <td>
-                    --
-                </td>
-
-                <td>
-                    ----------
-                </td>
-                <td>
-                    @Model.Comandas.Sum(p => p.Carne)
-                </td>
-                <td>
-                    @Model.Comandas.Sum(p => p.Papa)
-                </td>
-                <td>
-                    --
-                </td>
-                <td>
-                    @Model.Comandas.Sum(p => p.Total)
-                </td>
-                <td>
-                    ---------
-                </td>
-
-
-            </tr>
-           
-        </tbody>
-    </table>
 
 }

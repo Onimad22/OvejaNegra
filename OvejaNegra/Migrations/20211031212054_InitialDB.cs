@@ -3,24 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OvejaNegra.Migrations
 {
-    public partial class InitialDb : Migration
+    public partial class InitialDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Extras",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Precio = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Extras", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Pedidos",
                 columns: table => new
@@ -49,6 +35,9 @@ namespace OvejaNegra.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PrecioLocal = table.Column<double>(type: "float", nullable: false),
                     PrecioDelivery = table.Column<double>(type: "float", nullable: false),
+                    Carne = table.Column<int>(type: "int", nullable: false),
+                    Papa = table.Column<int>(type: "int", nullable: false),
+                    Bono = table.Column<double>(type: "float", nullable: false),
                     Categoria = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -65,21 +54,13 @@ namespace OvejaNegra.Migrations
                     PedidoId = table.Column<int>(type: "int", nullable: true),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     ProductoId = table.Column<int>(type: "int", nullable: true),
-                    ExtraId = table.Column<int>(type: "int", nullable: true),
-                    Carne = table.Column<int>(type: "int", nullable: false),
-                    Papa = table.Column<int>(type: "int", nullable: false),
-                    Queso = table.Column<int>(type: "int", nullable: false),
+                    Vegetariana = table.Column<bool>(type: "bit", nullable: false),
+                    Comentarios = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Total = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comandas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Comandas_Extras_ExtraId",
-                        column: x => x.ExtraId,
-                        principalTable: "Extras",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Comandas_Pedidos_PedidoId",
                         column: x => x.PedidoId,
@@ -93,11 +74,6 @@ namespace OvejaNegra.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comandas_ExtraId",
-                table: "Comandas",
-                column: "ExtraId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comandas_PedidoId",
@@ -114,9 +90,6 @@ namespace OvejaNegra.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Comandas");
-
-            migrationBuilder.DropTable(
-                name: "Extras");
 
             migrationBuilder.DropTable(
                 name: "Pedidos");

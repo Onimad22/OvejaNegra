@@ -18,20 +18,15 @@
                 <input asp-for="Cantidad" class="form-control" />
                 <span asp-validation-for="Cantidad" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Carne" class="control-label"></label>
-                <input asp-for="Carne" class="form-control" />
-                <span asp-validation-for="Carne" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Vegetariana" /> @Html.DisplayNameFor(model => model.Vegetariana)
+                </label>
             </div>
             <div class="form-group">
-                <label asp-for="Papa" class="control-label"></label>
-                <input asp-for="Papa" class="form-control" />
-                <span asp-validation-for="Papa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Queso" class="control-label"></label>
-                <input asp-for="Queso" class="form-control" />
-                <span asp-validation-for="Queso" class="text-danger"></span>
+                <label asp-for="Comentarios" class="control-label"></label>
+                <input asp-for="Comentarios" class="form-control" />
+                <span asp-validation-for="Comentarios" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Total" class="control-label"></label>

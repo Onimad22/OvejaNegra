@@ -19,9 +19,105 @@ namespace OvejaNegra.Data
         {
             await _context.Database.EnsureCreatedAsync();
             await CheckProductosAsync();
-            await CheckExtrasAsync();
             await CheckPedidosAsync();
             await CheckComandaAsync();
+        }
+
+
+        private async Task CheckProductosAsync()
+        {
+            if (!_context.Productos.Any())
+            {
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "Gri CS",
+                    PrecioLocal = 19,
+                    PrecioDelivery = 22,
+                    Carne=1,
+                    Papa=1,
+                    Bono=0.5,
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "Bbq CD",
+                    PrecioLocal = 36,
+                    PrecioDelivery = 39,
+                    Carne=2,
+                    Papa=1,
+                    Bono=0.5,
+                    Categoria = "Hamburguesa"
+                });;
+
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "Gau SS",
+                    PrecioLocal = 22,
+                    PrecioDelivery = 25,
+                    Carne=1,
+                    Papa=0,
+                    Bono=0.25,
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "Papa",
+                    PrecioLocal = 9,
+                    PrecioDelivery = 12,
+                    Carne=0,
+                    Papa=1,
+                    Bono=0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "Guarana",
+                    PrecioLocal = 8,
+                    PrecioDelivery = 8,
+                    Carne=0,
+                    Papa=0,
+                    Bono=0,
+                    Categoria = "Soda"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "Carne",
+                    PrecioLocal = 10,
+                    PrecioDelivery = 10,
+                    Carne=1,
+                    Papa=1,
+                    Bono=0,
+                    Categoria = "Hamburguesa"
+                });
+
+                await _context.SaveChangesAsync();
+            }
+
+        }
+
+        private async Task CheckPedidosAsync()
+        {
+
+            if (!_context.Pedidos.Any())
+            {
+                _context.Pedidos.Add(new Pedido
+                {
+                    Mesa = "mesa 1",
+                    Fecha = DateTime.Today,
+                    Hora = DateTime.Now,
+                    Pago = true,
+                    Cerrado=false,
+                    Delivery=true,
+                    Preparando=false
+
+                });
+
+
+
+                await _context.SaveChangesAsync();
+            }
         }
 
         private async Task CheckComandaAsync()
@@ -35,9 +131,6 @@ namespace OvejaNegra.Data
                     Pedido=pedido,
                     Cantidad=1,
                     Producto=producto,
-                    Carne=2,
-                    Queso=1,
-                    Papa=1,
                     Total=38
                 });
 
@@ -47,110 +140,7 @@ namespace OvejaNegra.Data
             }
         }
 
-        private async Task CheckPedidosAsync()
-        {
-            
-            if (!_context.Pedidos.Any())
-            {
-                _context.Pedidos.Add(new Pedido
-                {
-                    Pago=true,
-                    Mesa = "mesa 1",
-                    Fecha=DateTime.Today,
-                    Hora=DateTime.Now,
-                    
-                });
 
-              
 
-                await _context.SaveChangesAsync();
-            }
-        }
-
-        private async Task CheckExtrasAsync()
-        {
-            if (!_context.Extras.Any())
-            {
-                _context.Extras.Add(new Extra
-                {
-                    Nombre = "Carne",
-                    Precio = 10
-                });
-
-                _context.Extras.Add(new Extra
-                {
-                    Nombre = "Queso",
-                    Precio = 3
-                });
-
-                _context.Extras.Add(new Extra
-                {
-                    Nombre = "Papa",
-                    Precio = 9
-                });
-                _context.Extras.Add(new Extra
-                {
-                    Nombre = "Bono",
-                    Precio = 2.5
-                });
-
-                await _context.SaveChangesAsync();
-
-            }
-            
-        }
-
-        private async Task CheckProductosAsync()
-        {
-            if (!_context.Productos.Any())
-            {
-                _context.Productos.Add(new Producto { 
-                    Nombre = "Gringa", 
-                    PrecioLocal = 19, 
-                    PrecioDelivery = 22,
-                Categoria="Hamburguesa"});
-
-                _context.Productos.Add(new Producto
-                {
-                    Nombre = "Gaucha",
-                    PrecioLocal = 19,
-                    PrecioDelivery = 22,
-                Categoria = "Hamburguesa"
-                });
-
-                _context.Productos.Add(new Producto
-                {
-                    Nombre = "BBQ",
-                    PrecioLocal = 19,
-                    PrecioDelivery = 22,
-                Categoria = "Hamburguesa"
-                });
-
-                _context.Productos.Add(new Producto
-                {
-                    Nombre = "Fort",
-                    PrecioLocal = 19,
-                    PrecioDelivery = 22,
-                    Categoria = "Hamburguesa"
-                });
-                _context.Productos.Add(new Producto
-                {
-                    Nombre = "Coca-cola",
-                    PrecioLocal = 19,
-                    PrecioDelivery = 22,
-                    Categoria = "Soda"
-                });
-                _context.Productos.Add(new Producto
-                {
-                    Nombre = "Lager",
-                    PrecioLocal = 19,
-                    PrecioDelivery = 22,
-                    Categoria = "Cerveza"
-                });
-
-                await _context.SaveChangesAsync();
-            }
-            
-        }
     }
 }

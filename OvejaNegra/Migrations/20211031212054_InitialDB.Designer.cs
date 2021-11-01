@@ -10,8 +10,8 @@ using OvejaNegra.Data;
 namespace OvejaNegra.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211030183744_InitialDb")]
-    partial class InitialDb
+    [Migration("20211031212054_InitialDB")]
+    partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,14 +31,8 @@ namespace OvejaNegra.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("Carne")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ExtraId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Papa")
-                        .HasColumnType("int");
+                    b.Property<string>("Comentarios")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PedidoId")
                         .HasColumnType("int");
@@ -46,39 +40,19 @@ namespace OvejaNegra.Migrations
                     b.Property<int?>("ProductoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Queso")
-                        .HasColumnType("int");
-
                     b.Property<double>("Total")
                         .HasColumnType("float");
 
-                    b.HasKey("Id");
+                    b.Property<bool>("Vegetariana")
+                        .HasColumnType("bit");
 
-                    b.HasIndex("ExtraId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PedidoId");
 
                     b.HasIndex("ProductoId");
 
                     b.ToTable("Comandas");
-                });
-
-            modelBuilder.Entity("OvejaNegra.Data.Entities.Extra", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Precio")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Extras");
                 });
 
             modelBuilder.Entity("OvejaNegra.Data.Entities.Pedido", b =>
@@ -122,6 +96,12 @@ namespace OvejaNegra.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<double>("Bono")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Carne")
+                        .HasColumnType("int");
+
                     b.Property<string>("Categoria")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -129,6 +109,9 @@ namespace OvejaNegra.Migrations
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Papa")
+                        .HasColumnType("int");
 
                     b.Property<double>("PrecioDelivery")
                         .HasColumnType("float");
@@ -143,10 +126,6 @@ namespace OvejaNegra.Migrations
 
             modelBuilder.Entity("OvejaNegra.Data.Entities.Comanda", b =>
                 {
-                    b.HasOne("OvejaNegra.Data.Entities.Extra", "Extra")
-                        .WithMany("Comandas")
-                        .HasForeignKey("ExtraId");
-
                     b.HasOne("OvejaNegra.Data.Entities.Pedido", "Pedido")
                         .WithMany("Comandas")
                         .HasForeignKey("PedidoId");
@@ -155,16 +134,9 @@ namespace OvejaNegra.Migrations
                         .WithMany("Comandas")
                         .HasForeignKey("ProductoId");
 
-                    b.Navigation("Extra");
-
                     b.Navigation("Pedido");
 
                     b.Navigation("Producto");
-                });
-
-            modelBuilder.Entity("OvejaNegra.Data.Entities.Extra", b =>
-                {
-                    b.Navigation("Comandas");
                 });
 
             modelBuilder.Entity("OvejaNegra.Data.Entities.Pedido", b =>
