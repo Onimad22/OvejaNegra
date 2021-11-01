@@ -16,7 +16,7 @@ namespace OvejaNegra.Data.Entities
         [Display(Name = "Mesa")]
         public string Mesa { get; set; }
 
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTime Fecha { get; set; }
 
         [DataType(DataType.Time)]

@@ -26,7 +26,7 @@ namespace OvejaNegra.Controllers
         // GET: Pedidos
         public IActionResult Index()
         {
-            return View(_context.Pedidos.Include(p => p.Comandas).Where(m => m.Fecha == DateTime.Today).Where(c => c.Cerrado ==false));
+            return View(_context.Pedidos.Include(p => p.Comandas).Where(c => c.Cerrado ==false));
         }
 
         // GET: Pedidos/Details/5
@@ -60,8 +60,9 @@ namespace OvejaNegra.Controllers
         public async Task<IActionResult> Create([Bind("Mesa,Delivery")] Pedido model)
         {
             
-            model.Fecha = DateTime.Today;
-            model.Hora = DateTime.Now;
+
+            model.Fecha = DateTime.Now;
+            model.Hora = DateTime.Now.ToLocalTime();
             
             if (ModelState.IsValid)
             {
