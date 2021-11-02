@@ -214,7 +214,19 @@ namespace OvejaNegra.Controllers
 
                 _context.Comandas.Add(comanda);
                 await _context.SaveChangesAsync();
+
+                //GUARDAR EL TOTAL EN PEDIDO
+                var pedido = await _context.Pedidos.FindAsync(model.PedidoId);
+                var comandas = _context.Comandas.Where(c => c.Pedido == comanda.Pedido);
+                pedido.Total = comandas.Sum(p => p.Total);
+                _context.Update(pedido);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction("Details", "Pedidos", new { id = model.PedidoId });
+
+                
+
+              
 
             }
             return View(model);
@@ -246,6 +258,14 @@ namespace OvejaNegra.Controllers
             var comanda = await _context.Comandas.Include(c=>c.Pedido).FirstOrDefaultAsync(m => m.Id == id);
             _context.Comandas.Remove(comanda);
             await _context.SaveChangesAsync();
+
+            //GUARDAR EL TOTAL EN PEDIDO
+            var pedido = await _context.Pedidos.FindAsync(comanda.Pedido.Id);
+            var comandas = _context.Comandas.Where(c => c.Pedido == comanda.Pedido);
+            pedido.Total = comandas.Sum(p => p.Total);
+            _context.Update(pedido);
+            await _context.SaveChangesAsync();
+
             return RedirectToAction("Details", "Pedidos", new { id = comanda.Pedido.Id });
 
         }
