@@ -26,7 +26,9 @@ namespace OvejaNegra.Controllers
         // GET: Pedidos
         public IActionResult Index()
         {
-            return View(_context.Pedidos.Include(p => p.Comandas).Where(c => c.Cerrado ==false));
+            var fecha = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0)).Date;
+
+            return View(_context.Pedidos.Include(p => p.Comandas).Where(f=>f.Fecha.Date==fecha).Where(c => c.Cerrado ==false));
         }
 
         // GET: Pedidos/Details/5
