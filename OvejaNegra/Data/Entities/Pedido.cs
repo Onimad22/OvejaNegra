@@ -30,6 +30,8 @@ namespace OvejaNegra.Data.Entities
 
         public bool Delivery { get; set; }
 
+        public double Total { get; set; }
+
         public ICollection<Comanda> Comandas { get; set; }
     }
 }
