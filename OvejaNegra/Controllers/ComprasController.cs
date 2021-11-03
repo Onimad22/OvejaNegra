@@ -7,22 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OvejaNegra.Data;
 using OvejaNegra.Data.Entities;
+using OvejaNegra.Helpers;
+using OvejaNegra.Models;
 
 namespace OvejaNegra.Controllers
 {
     public class ComprasController : Controller
     {
         private readonly DataContext _context;
+        private readonly ICombosHelper _combosHerlper;
 
-        public ComprasController(DataContext context)
+        public ComprasController(DataContext context, ICombosHelper combosHerlper)
         {
             _context = context;
+            _combosHerlper = combosHerlper;
         }
 
         // GET: Compras
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Compras.ToListAsync());
+            var fecha = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0)).Date;
+
+            return View(await _context.Compras.Include(i=>i.Insumo).Where(f => f.Fecha.Date == fecha).ToListAsync());
         }
 
         // GET: Compras/Details/5
@@ -46,7 +52,14 @@ namespace OvejaNegra.Controllers
         // GET: Compras/Create
         public IActionResult Create()
         {
-            return View();
+            var model = new CompraViewModel
+            {
+                
+                Insumos = _combosHerlper.GetComboInsumo(),
+                
+            };
+
+            return View(model);
         }
 
         // POST: Compras/Create
@@ -54,15 +67,24 @@ namespace OvejaNegra.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Total,Fecha")] Compra compra)
+        public async Task<IActionResult> Create(CompraViewModel model)
         {
+
+            var fecha = DateTimeOffset.Now;
+            var fechalocal = fecha.ToOffset(new TimeSpan(-4, 0, 0));
             if (ModelState.IsValid)
             {
+                var compra = new Compra();
+
+                compra.Fecha = fechalocal;
+                compra.Insumo = await _context.Insumos.FindAsync(model.InsumoId);
+                compra.Total = model.Total;
+
                 _context.Add(compra);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(compra);
+            return View(model);
         }
 
         // GET: Compras/Edit/5

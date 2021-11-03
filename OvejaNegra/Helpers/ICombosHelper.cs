@@ -6,5 +6,6 @@ namespace OvejaNegra.Helpers
     public interface ICombosHelper
     {
         IEnumerable<SelectListItem> GetComboProducto();
+        IEnumerable<SelectListItem> GetComboInsumo();
     }
 }
