@@ -8,6 +8,20 @@ namespace OvejaNegra.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Insumos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Categoria = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Insumos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Pedidos",
                 columns: table => new
                 {
@@ -18,7 +32,8 @@ namespace OvejaNegra.Migrations
                     Pago = table.Column<bool>(type: "bit", nullable: false),
                     Cerrado = table.Column<bool>(type: "bit", nullable: false),
                     Preparando = table.Column<bool>(type: "bit", nullable: false),
-                    Delivery = table.Column<bool>(type: "bit", nullable: false)
+                    Delivery = table.Column<bool>(type: "bit", nullable: false),
+                    Total = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,6 +57,27 @@ namespace OvejaNegra.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Productos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Compras",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Total = table.Column<double>(type: "float", nullable: false),
+                    Fecha = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    InsumoId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Compras", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Compras_Insumos_InsumoId",
+                        column: x => x.InsumoId,
+                        principalTable: "Insumos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,6 +119,11 @@ namespace OvejaNegra.Migrations
                 name: "IX_Comandas_ProductoId",
                 table: "Comandas",
                 column: "ProductoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Compras_InsumoId",
+                table: "Compras",
+                column: "InsumoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -91,10 +132,16 @@ namespace OvejaNegra.Migrations
                 name: "Comandas");
 
             migrationBuilder.DropTable(
+                name: "Compras");
+
+            migrationBuilder.DropTable(
                 name: "Pedidos");
 
             migrationBuilder.DropTable(
                 name: "Productos");
+
+            migrationBuilder.DropTable(
+                name: "Insumos");
         }
     }
 }

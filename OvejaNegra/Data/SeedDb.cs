@@ -21,8 +21,41 @@ namespace OvejaNegra.Data
             await CheckProductosAsync();
             await CheckPedidosAsync();
             await CheckComandaAsync();
+            await CheckInsumoAsync();
+            await CheckCompraAsync();
         }
 
+        private async Task CheckCompraAsync()
+        {
+            var insumo = _context.Insumos.FirstOrDefault();
+            if (!_context.Compras.Any())
+            {
+                _context.Compras.Add(new Compra
+                {
+                    Fecha = DateTimeOffset.Now,
+                    Insumo=insumo,
+                    Total=15
+                });
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private async Task CheckInsumoAsync()
+        {
+            if (!_context.Insumos.Any())
+            {
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Tomate",
+                    Categoria = "Hamburguesa"
+                });
+
+
+
+                await _context.SaveChangesAsync();
+            }
+        }
 
         private async Task CheckProductosAsync()
         {

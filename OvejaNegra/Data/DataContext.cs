@@ -17,6 +17,8 @@ namespace OvejaNegra.Data
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Comanda> Comandas { get; set; }
+        public DbSet<Compra> Compras { get; set; }
+        public DbSet<Insumo> Insumos { get; set; }
 
     }
    

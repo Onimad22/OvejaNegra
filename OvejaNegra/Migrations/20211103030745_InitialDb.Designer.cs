@@ -10,7 +10,7 @@ using OvejaNegra.Data;
 namespace OvejaNegra.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211101193601_InitialDb")]
+    [Migration("20211103030745_InitialDb")]
     partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,6 +55,48 @@ namespace OvejaNegra.Migrations
                     b.ToTable("Comandas");
                 });
 
+            modelBuilder.Entity("OvejaNegra.Data.Entities.Compra", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("Fecha")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int?>("InsumoId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InsumoId");
+
+                    b.ToTable("Compras");
+                });
+
+            modelBuilder.Entity("OvejaNegra.Data.Entities.Insumo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Categoria")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Insumos");
+                });
+
             modelBuilder.Entity("OvejaNegra.Data.Entities.Pedido", b =>
                 {
                     b.Property<int>("Id")
@@ -80,6 +122,9 @@ namespace OvejaNegra.Migrations
 
                     b.Property<bool>("Preparando")
                         .HasColumnType("bit");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -134,6 +179,20 @@ namespace OvejaNegra.Migrations
                     b.Navigation("Pedido");
 
                     b.Navigation("Producto");
+                });
+
+            modelBuilder.Entity("OvejaNegra.Data.Entities.Compra", b =>
+                {
+                    b.HasOne("OvejaNegra.Data.Entities.Insumo", "Insumo")
+                        .WithMany("Compras")
+                        .HasForeignKey("InsumoId");
+
+                    b.Navigation("Insumo");
+                });
+
+            modelBuilder.Entity("OvejaNegra.Data.Entities.Insumo", b =>
+                {
+                    b.Navigation("Compras");
                 });
 
             modelBuilder.Entity("OvejaNegra.Data.Entities.Pedido", b =>
