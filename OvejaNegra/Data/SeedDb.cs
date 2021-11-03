@@ -24,6 +24,26 @@ namespace OvejaNegra.Data
             await CheckInsumoAsync();
             await CheckCompraAsync();
             await CheckCajaAsync();
+            await CheckCierreAsync();
+
+        }
+
+        private async Task CheckCierreAsync()
+        {
+            if (!_context.Cierre.Any())
+            {
+                _context.Cierre.Add(new Cierre
+                {
+                    Fecha = DateTimeOffset.Now,
+                    CajaAyer=100,
+                    CajaHoy=100,
+                    Compras=100,
+                    Ventas=100,
+                    Balance=100
+                });
+
+                await _context.SaveChangesAsync();
+            }
         }
 
         private async Task CheckCajaAsync()

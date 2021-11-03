@@ -1,0 +1,54 @@
+﻿@model OvejaNegra.Data.Entities.Cierre
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Cierre</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CajaAyer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CajaAyer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CajaHoy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CajaHoy)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ventas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ventas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Compras)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Compras)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -55,53 +55,56 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.diezc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.veintec)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cincuentac)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.unb)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dosb)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cincob)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.diezb)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.veinteb)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cincuentab)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cienb)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.doscientosb)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.diezc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.veintec)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cincuentac)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.unb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dosb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cincob)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.diezb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.veinteb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cincuentab)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cienb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.doscientosb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
