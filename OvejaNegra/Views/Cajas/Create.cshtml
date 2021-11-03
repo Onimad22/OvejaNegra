@@ -1,0 +1,85 @@
+﻿@model OvejaNegra.Data.Entities.Caja
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Caja</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="diezc" class="control-label"></label>
+                <input asp-for="diezc" class="form-control" />
+                <span asp-validation-for="diezc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="veintec" class="control-label"></label>
+                <input asp-for="veintec" class="form-control" />
+                <span asp-validation-for="veintec" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cincuentac" class="control-label"></label>
+                <input asp-for="cincuentac" class="form-control" />
+                <span asp-validation-for="cincuentac" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="unb" class="control-label"></label>
+                <input asp-for="unb" class="form-control" />
+                <span asp-validation-for="unb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dosb" class="control-label"></label>
+                <input asp-for="dosb" class="form-control" />
+                <span asp-validation-for="dosb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cincob" class="control-label"></label>
+                <input asp-for="cincob" class="form-control" />
+                <span asp-validation-for="cincob" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="diezb" class="control-label"></label>
+                <input asp-for="diezb" class="form-control" />
+                <span asp-validation-for="diezb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="veinteb" class="control-label"></label>
+                <input asp-for="veinteb" class="form-control" />
+                <span asp-validation-for="veinteb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cincuentab" class="control-label"></label>
+                <input asp-for="cincuentab" class="form-control" />
+                <span asp-validation-for="cincuentab" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cienb" class="control-label"></label>
+                <input asp-for="cienb" class="form-control" />
+                <span asp-validation-for="cienb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="doscientosb" class="control-label"></label>
+                <input asp-for="doscientosb" class="form-control" />
+                <span asp-validation-for="doscientosb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
