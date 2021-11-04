@@ -16,6 +16,26 @@ namespace OvejaNegra.Helpers
 
         }
 
+        public IEnumerable<SelectListItem> GetComboEmpleado()
+        {
+            var lista = _context.Empleado.Select(p => new SelectListItem
+            {
+                Text = p.Nombre,
+                Value = $"{p.Id}"
+            })
+              .OrderBy(p => p.Text)
+              .ToList();
+
+            lista.Insert(0, new SelectListItem
+            {
+                Text = "Select a Item",
+                Value = "0"
+            });
+
+
+            return lista;
+        }
+
         public IEnumerable<SelectListItem> GetComboInsumo()
         {
             var lista = _context.Insumos.Select(p => new SelectListItem

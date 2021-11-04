@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "mssql1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/ovejanegradbserver2/databases/OvejaNegra_db",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/ovejanegradbserver2/databases/OvenaNegra_db",
       "type": "mssql.azure",
       "connectionId": "ConnectionStrings:DefaultConnection",
       "secretStore": "AzureAppSettings"

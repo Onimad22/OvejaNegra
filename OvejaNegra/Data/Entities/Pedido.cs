@@ -32,6 +32,8 @@ namespace OvejaNegra.Data.Entities
 
         public double Total { get; set; }
 
+        public double BonoT { get; set; }
+
         public ICollection<Comanda> Comandas { get; set; }
     }
 }

@@ -211,8 +211,10 @@ namespace OvejaNegra.Controllers
                     precio = comanda.Producto.PrecioLocal;
                 }
 
+                var precioBono = comanda.Producto.Bono;
 
                 comanda.Total = precio * model.Cantidad;
+                comanda.Bono = precioBono * model.Cantidad;
 
                 _context.Comandas.Add(comanda);
                 await _context.SaveChangesAsync();
@@ -221,6 +223,7 @@ namespace OvejaNegra.Controllers
                 var pedido = await _context.Pedidos.FindAsync(model.PedidoId);
                 var comandas = _context.Comandas.Where(c => c.Pedido == comanda.Pedido);
                 pedido.Total = comandas.Sum(p => p.Total);
+                pedido.BonoT = comandas.Sum(b => b.Bono);
                 _context.Update(pedido);
                 await _context.SaveChangesAsync();
 

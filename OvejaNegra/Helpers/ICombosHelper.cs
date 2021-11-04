@@ -7,5 +7,6 @@ namespace OvejaNegra.Helpers
     {
         IEnumerable<SelectListItem> GetComboProducto();
         IEnumerable<SelectListItem> GetComboInsumo();
+        IEnumerable<SelectListItem> GetComboEmpleado();
     }
 }

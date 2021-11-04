@@ -21,6 +21,8 @@ namespace OvejaNegra.Data
         public DbSet<Insumo> Insumos { get; set; }
         public DbSet<OvejaNegra.Data.Entities.Caja> Caja { get; set; }
         public DbSet<OvejaNegra.Data.Entities.Cierre> Cierre { get; set; }
+        public DbSet<OvejaNegra.Data.Entities.Empleado> Empleado { get; set; }
+        public DbSet<OvejaNegra.Data.Entities.Sueldo> Sueldo { get; set; }
 
     }
    

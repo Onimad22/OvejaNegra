@@ -12,7 +12,6 @@ namespace OvejaNegra.Data.Entities
         public int Id { get; set; }
         
         public Pedido Pedido { get; set; }
-
         
         public int Cantidad { get; set; }
         
@@ -23,5 +22,7 @@ namespace OvejaNegra.Data.Entities
         public string Comentarios { get; set; }
 
         public double Total { get; set; }
+
+        public double Bono { get; set; }
     }
 }

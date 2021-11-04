@@ -107,6 +107,9 @@ namespace OvejaNegra.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<double>("Bono")
+                        .HasColumnType("float");
+
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
@@ -157,6 +160,25 @@ namespace OvejaNegra.Migrations
                     b.ToTable("Compras");
                 });
 
+            modelBuilder.Entity("OvejaNegra.Data.Entities.Empleado", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Sueldo")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Empleado");
+                });
+
             modelBuilder.Entity("OvejaNegra.Data.Entities.Insumo", b =>
                 {
                     b.Property<int>("Id")
@@ -182,6 +204,9 @@ namespace OvejaNegra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("BonoT")
+                        .HasColumnType("float");
 
                     b.Property<bool>("Cerrado")
                         .HasColumnType("bit");
@@ -245,6 +270,47 @@ namespace OvejaNegra.Migrations
                     b.ToTable("Productos");
                 });
 
+            modelBuilder.Entity("OvejaNegra.Data.Entities.Sueldo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("Bono")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("EmpleadoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("Fecha")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("HoraE")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("HoraS")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<double>("HoraT")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Jornal")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("Pago")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpleadoId");
+
+                    b.ToTable("Sueldo");
+                });
+
             modelBuilder.Entity("OvejaNegra.Data.Entities.Comanda", b =>
                 {
                     b.HasOne("OvejaNegra.Data.Entities.Pedido", "Pedido")
@@ -267,6 +333,20 @@ namespace OvejaNegra.Migrations
                         .HasForeignKey("InsumoId");
 
                     b.Navigation("Insumo");
+                });
+
+            modelBuilder.Entity("OvejaNegra.Data.Entities.Sueldo", b =>
+                {
+                    b.HasOne("OvejaNegra.Data.Entities.Empleado", "Empleado")
+                        .WithMany("Sueldos")
+                        .HasForeignKey("EmpleadoId");
+
+                    b.Navigation("Empleado");
+                });
+
+            modelBuilder.Entity("OvejaNegra.Data.Entities.Empleado", b =>
+                {
+                    b.Navigation("Sueldos");
                 });
 
             modelBuilder.Entity("OvejaNegra.Data.Entities.Insumo", b =>
