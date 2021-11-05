@@ -38,7 +38,7 @@ namespace OvejaNegra.Controllers
             }
 
             var empleado = await _context.Empleado
-                .Include(s=>s.Sueldos)
+                .Include(s=>s.Sueldos.Where(p=>p.Pago==false))
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (empleado == null)
             {
@@ -211,6 +211,97 @@ namespace OvejaNegra.Controllers
             }
             return View(model);
         }
+
+        // GET: Sueldos/Edit/5
+        public async Task<IActionResult> SueldoEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var sueldo = await _context.Sueldo.FindAsync(id);
+            if (sueldo == null)
+            {
+                return NotFound();
+            }
+            return View(sueldo);
+        }
+
+        // POST: Sueldos/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SueldoEdit(int id, [Bind("Id,Fecha,HoraE,HoraS,HoraT,Jornal,Bono,Total,Pago")] Sueldo sueldo)
+        {
+            if (id != sueldo.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(sueldo);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SueldoExists(sueldo.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(sueldo);
+        }
+        private bool SueldoExists(int id)
+        {
+            return _context.Sueldo.Any(e => e.Id == id);
+        }
+
+
+        // GET: PAGAR SUELDOS
+        public async Task<IActionResult> PagarSueldo(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var sueldo = _context.Sueldo
+                .Include(s => s.Empleado)
+                .Where(m => m.Empleado.Id == id)
+                .Where(p=>p.Pago==false).ToList();
+            if (sueldo == null)
+            {
+                return NotFound();
+            }
+
+
+            foreach (var item in sueldo)
+            {
+
+                item.Pago = true;
+                
+
+                    _context.Update(item);
+                   await _context.SaveChangesAsync();
+
+            }
+
+
+
+            return RedirectToAction("Details", "Empleados", new { id = id });
+        }
+
 
     }
 }
