@@ -106,7 +106,7 @@ namespace OvejaNegra.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Fecha,CajaAyer,CajaHoy,Ventas,Compras,Balance")] Cierre cierre)
+        public async Task<IActionResult> Create([Bind("Id,Fecha,CajaAyer,CajaHoy,Ventas,Compras,Balance,Sueldos")] Cierre cierre)
         {
 
             //var fechaHoy = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0)).Date;

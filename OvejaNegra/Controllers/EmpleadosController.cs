@@ -304,7 +304,8 @@ namespace OvejaNegra.Controllers
             sueldoPago.Total = sueldo.Sum(s => s.Total);
             sueldoPago.Empleado= _context.Empleado.Find(id);
 
-
+            _context.SueldosPago.Add(sueldoPago);
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("Details", "Empleados", new { id = id });
         }

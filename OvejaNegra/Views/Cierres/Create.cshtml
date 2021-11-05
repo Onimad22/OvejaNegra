@@ -12,40 +12,40 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group ">
                 <label asp-for="Fecha" class="control-label"></label>
-                <input asp-for="Fecha" class="form-control" />
+                <input asp-for="Fecha" class="form-control" readonly/>
                 <span asp-validation-for="Fecha" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group ">
                 <label asp-for="CajaAyer" class="control-label"></label>
-                <input asp-for="CajaAyer" class="form-control" />
+                <input asp-for="CajaAyer" class="form-control" readonly />
                 <span asp-validation-for="CajaAyer" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group ">
                 <label asp-for="CajaHoy" class="control-label"></label>
-                <input asp-for="CajaHoy" class="form-control" />
+                <input asp-for="CajaHoy" class="form-control"readonly />
                 <span asp-validation-for="CajaHoy" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group ">
                 <label asp-for="Ventas" class="control-label"></label>
-                <input asp-for="Ventas" class="form-control" />
+                <input asp-for="Ventas" class="form-control" readonly/>
                 <span asp-validation-for="Ventas" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group ">
                 <label asp-for="Compras" class="control-label"></label>
-                <input asp-for="Compras" class="form-control" />
+                <input asp-for="Compras" class="form-control" readonly />
                 <span asp-validation-for="Compras" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Sueldos" class="control-label"></label>
-                <input asp-for="Sueldos" class="form-control" />
+                <input asp-for="Sueldos" class="form-control" readonly />
                 <span asp-validation-for="Sueldos" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group enable">
                 <label asp-for="Balance" class="control-label"></label>
-                <input asp-for="Balance" class="form-control" />
+                <input asp-for="Balance" class="form-control" readonly/>
                 <span asp-validation-for="Balance" class="text-danger"></span>
             </div>
             <div class="form-group">
