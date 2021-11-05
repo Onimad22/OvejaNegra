@@ -20,5 +20,8 @@ namespace OvejaNegra.Data.Entities
         public double Sueldo { get; set; }
 
         public ICollection<Sueldo> Sueldos { get; set; }
+
+        public ICollection<SueldoPago> SueldosPago { get; set; }
+
     }
 }

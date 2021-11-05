@@ -297,6 +297,13 @@ namespace OvejaNegra.Controllers
 
             }
 
+            var fecha = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0));
+            var sueldoPago = new SueldoPago();
+
+            sueldoPago.Fecha = fecha;
+            sueldoPago.Total = sueldo.Sum(s => s.Total);
+            sueldoPago.Empleado= _context.Empleado.Find(id);
+
 
 
             return RedirectToAction("Details", "Empleados", new { id = id });
