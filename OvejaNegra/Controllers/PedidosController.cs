@@ -39,7 +39,10 @@ namespace OvejaNegra.Controllers
                 return NotFound();
             }
 
-            var pedido = await _context.Pedidos.Include(c=>c.Comandas).ThenInclude(p=>p.Producto).FirstOrDefaultAsync(m => m.Id == id);
+            var pedido = await _context.Pedidos
+                .Include(c=>c.Comandas)
+                .ThenInclude(p=>p.Producto)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (pedido == null)
             {
                 return NotFound();

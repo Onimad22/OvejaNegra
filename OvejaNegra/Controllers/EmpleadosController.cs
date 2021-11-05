@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OvejaNegra.Data;
 using OvejaNegra.Data.Entities;
+using OvejaNegra.Helpers;
+using OvejaNegra.Models;
 
 namespace OvejaNegra.Controllers
 {
     public class EmpleadosController : Controller
     {
         private readonly DataContext _context;
+        private readonly ICombosHelper _combosHerlper;
 
-        public EmpleadosController(DataContext context)
+        public EmpleadosController(DataContext context, ICombosHelper combosHerlper)
         {
             _context = context;
+            _combosHerlper = combosHerlper;
         }
 
         // GET: Empleados
@@ -34,6 +38,7 @@ namespace OvejaNegra.Controllers
             }
 
             var empleado = await _context.Empleado
+                .Include(s=>s.Sueldos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (empleado == null)
             {
@@ -149,5 +154,63 @@ namespace OvejaNegra.Controllers
         {
             return _context.Empleado.Any(e => e.Id == id);
         }
+
+        // GET: Sueldos/Create
+        public async Task<IActionResult> AddSueldo(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var empleado = await _context.Empleado.FindAsync(id.Value);
+            if (empleado == null)
+            {
+                return NotFound();
+            }
+
+            var model = new SueldoViewModel
+            {
+
+                
+                EmpleadoId=empleado.Id,
+
+            };
+
+            return View(model);
+        }
+
+        // POST: Sueldos/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddSueldo(SueldoViewModel model)
+        {
+            var fecha = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0));
+            var bono = _context.Pedidos.Where(c => c.Fecha.Date == fecha.Date);
+            var empleado = _context.Empleado.Find(model.EmpleadoId);
+
+            var sueldo = new Sueldo();
+
+            if (ModelState.IsValid)
+            {
+                sueldo.HoraE = model.HoraE;
+                sueldo.HoraS = model.HoraS;
+                sueldo.Fecha = fecha.Date;
+                sueldo.HoraT = (model.HoraS - model.HoraE).TotalHours;
+                sueldo.Bono = bono.Sum(p => p.BonoT);
+                sueldo.Jornal = sueldo.HoraT * empleado.Sueldo;
+                sueldo.Total = sueldo.Bono + sueldo.Jornal;
+                sueldo.Empleado = empleado;
+
+
+                _context.Add(sueldo);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(model);
+        }
+
     }
 }
