@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OvejaNegra.Migrations
 {
-    public partial class Initialdb : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -145,6 +145,27 @@ namespace OvejaNegra.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SueldosPago",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fecha = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    Total = table.Column<double>(type: "float", nullable: false),
+                    EmpleadoId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SueldosPago", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SueldosPago_Empleado_EmpleadoId",
+                        column: x => x.EmpleadoId,
+                        principalTable: "Empleado",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Compras",
                 columns: table => new
                 {
@@ -215,6 +236,11 @@ namespace OvejaNegra.Migrations
                 name: "IX_Sueldo_EmpleadoId",
                 table: "Sueldo",
                 column: "EmpleadoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SueldosPago_EmpleadoId",
+                table: "SueldosPago",
+                column: "EmpleadoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -233,6 +259,9 @@ namespace OvejaNegra.Migrations
 
             migrationBuilder.DropTable(
                 name: "Sueldo");
+
+            migrationBuilder.DropTable(
+                name: "SueldosPago");
 
             migrationBuilder.DropTable(
                 name: "Pedidos");

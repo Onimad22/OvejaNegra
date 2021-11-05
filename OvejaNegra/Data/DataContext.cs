@@ -19,11 +19,13 @@ namespace OvejaNegra.Data
         public DbSet<Comanda> Comandas { get; set; }
         public DbSet<Compra> Compras { get; set; }
         public DbSet<Insumo> Insumos { get; set; }
-        public DbSet<OvejaNegra.Data.Entities.Caja> Caja { get; set; }
-        public DbSet<OvejaNegra.Data.Entities.Cierre> Cierre { get; set; }
-        public DbSet<OvejaNegra.Data.Entities.Empleado> Empleado { get; set; }
-        public DbSet<OvejaNegra.Data.Entities.Sueldo> Sueldo { get; set; }
+        public DbSet<Caja> Caja { get; set; }
+        public DbSet<Cierre> Cierre { get; set; }
+        public DbSet<Empleado> Empleado { get; set; }
+        public DbSet<Sueldo> Sueldo { get; set; }
+        public DbSet<SueldoPago> SueldosPago { get; set; }
+
 
     }
-   
+
 }
