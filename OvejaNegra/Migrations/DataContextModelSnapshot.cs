@@ -92,6 +92,9 @@ namespace OvejaNegra.Migrations
                     b.Property<DateTimeOffset>("Fecha")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<double>("Sueldos")
+                        .HasColumnType("float");
+
                     b.Property<double>("Ventas")
                         .HasColumnType("float");
 

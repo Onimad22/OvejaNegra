@@ -26,6 +26,9 @@ namespace OvejaNegra.Data.Entities
         [Display(Name = "Compras")]
         public double Compras { get; set; }
 
+        [Display(Name = "Sueldos")]
+        public double Sueldos { get; set; }
+
         [Display(Name = "Cierre")]
         public double Balance { get; set; }
 

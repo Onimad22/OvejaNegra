@@ -53,8 +53,10 @@ namespace OvejaNegra.Controllers
 
             var cajaA = new Caja { Total = 0 };
             var cajaH = new Caja { Total = 0 };
+            var listaSueldos=new List<SueldoPago>();
             var compras = 0.0;
             var ventas = 0.0;
+            var sueldos = 0.0;
 
             if (_context.Compras.FirstOrDefault(f => f.Fecha.Date == fechaHoy) != null)
             {
@@ -78,15 +80,23 @@ namespace OvejaNegra.Controllers
                 cajaA = _context.Caja.FirstOrDefault(f => f.Fecha.Date == fechaAyer);
             }
 
+            if (_context.SueldosPago.FirstOrDefault(f => f.Fecha.Date == fechaHoy) != null)
+            {
+                listaSueldos = _context.SueldosPago.Where(f => f.Fecha.Date == fechaHoy).ToList();
+                sueldos = listaSueldos.Sum(f => f.Total);
+            
+            }
+
             var cierre = new Cierre();
 
             cierre.CajaAyer = cajaA.Total;
             cierre.CajaHoy = cajaH.Total;
             cierre.Ventas = ventas;
             cierre.Compras = compras;
+            cierre.Sueldos = sueldos;
 
             cierre.Fecha = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0));
-            cierre.Balance = (cierre.CajaAyer + cierre.Ventas - cierre.Compras - cierre.CajaHoy)*-1;
+            cierre.Balance = (cierre.CajaAyer + cierre.Ventas - cierre.Compras - cierre.CajaHoy-cierre.Sueldos)*-1;
 
             return View(cierre);
         }

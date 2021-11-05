@@ -10,7 +10,7 @@ using OvejaNegra.Data;
 namespace OvejaNegra.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211105212820_InitialDb")]
+    [Migration("20211105215717_InitialDb")]
     partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,6 +93,9 @@ namespace OvejaNegra.Migrations
 
                     b.Property<DateTimeOffset>("Fecha")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<double>("Sueldos")
+                        .HasColumnType("float");
 
                     b.Property<double>("Ventas")
                         .HasColumnType("float");
