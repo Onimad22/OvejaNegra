@@ -82,7 +82,7 @@ namespace OvejaNegra.Controllers
                 sueldo.Bono = bono.Sum(p => p.BonoT);
                 sueldo.Jornal = sueldo.HoraT * empleado.Sueldo;
                 sueldo.Total = sueldo.Bono + sueldo.Jornal;
-                sueldo.Empleado = model.Empleado;
+                sueldo.Empleado = empleado;
 
                 _context.Add(sueldo);
                 await _context.SaveChangesAsync();
