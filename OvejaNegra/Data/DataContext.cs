@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OvejaNegra.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OvejaNegra.Data
 {
-    public class DataContext:DbContext
+    public class DataContext:IdentityDbContext<User>
     {
         public DataContext(DbContextOptions<DataContext>options):base(options)
         {
@@ -24,6 +25,8 @@ namespace OvejaNegra.Data
         public DbSet<Empleado> Empleado { get; set; }
         public DbSet<Sueldo> Sueldo { get; set; }
         public DbSet<SueldoPago> SueldosPago { get; set; }
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
 
     }

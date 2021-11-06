@@ -1,4 +1,5 @@
 ﻿using OvejaNegra.Data.Entities;
+using OvejaNegra.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,22 @@ namespace OvejaNegra.Data
     public class SeedDb
     {
         private readonly DataContext _context;
+        private readonly IUserHelper _userHelper;
 
-        public SeedDb(DataContext context)
+        public SeedDb(DataContext context, IUserHelper userHelper)
         {
             _context = context;
+            _userHelper = userHelper;
         }
 
         public async Task SeedAsync()
         {
             await _context.Database.EnsureCreatedAsync();
+            await CheckRoles();
+            var manager = await CheckUserAsync("Pablo", "Dorado","pablo@ovejanegra.com","Admin");
+            var customer = await CheckUserAsync("Mesero", "Mesera","mesero@ovejanegra.com","Customer");
+            await CheckManagerAsync(manager);
+            await CheckCustomerAsync(customer);
             await CheckProductosAsync();
             await CheckPedidosAsync();
             await CheckComandaAsync();
@@ -27,6 +35,51 @@ namespace OvejaNegra.Data
             await CheckCierreAsync();
 
         }
+
+        private async Task CheckCustomerAsync(User customer)
+        {
+            if (!_context.Customers.Any())
+            {
+                _context.Customers.Add(new Customer { User = customer });
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private async Task CheckManagerAsync(User manager)
+        {
+            if (!_context.Managers.Any())
+            {
+                _context.Managers.Add(new Manager { User = manager });
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private async Task<User> CheckUserAsync(string firstName, string lastName, string email,string role)
+        {
+            var user = await _userHelper.GetUserByEmailAsync(email);
+            if (user==null)
+            {
+                user = new User
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    UserName = email,
+                    Email = email
+                };
+                await _userHelper.AddUserAsync(user, "123456");
+                await _userHelper.AddUserToRoleAsync(user, role);
+
+            }
+            return user;
+        }
+
+        private async Task CheckRoles()
+        {
+            await _userHelper.CheckRoleAsync("Admin");
+            await _userHelper.CheckRoleAsync("Customer");
+        }
+
+
 
         private async Task CheckCierreAsync()
         {
