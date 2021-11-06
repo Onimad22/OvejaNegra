@@ -28,7 +28,9 @@ namespace OvejaNegra.Controllers
         {
             var fecha = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0)).Date;
 
-            return View(_context.Pedidos.Include(p => p.Comandas).Where(f=>f.Fecha.Date==fecha).Where(c => c.Cerrado ==false));
+            var model = _context.Pedidos.Include(p => p.Comandas).Where(f => f.Fecha.Date == fecha).Where(c => c.Cerrado == false).ToList();
+
+            return View(model);
         }
 
         // GET: Pedidos/Details/5
@@ -102,7 +104,7 @@ namespace OvejaNegra.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Mesa,Fecha,Hora,Preparando,Delivery,Pago,Cerrado")] Pedido pedido)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Mesa,Fecha,Hora,Preparando,Delivery,Pago,Cerrado,Total")] Pedido pedido)
         {
             if (id != pedido.Id)
             {
@@ -127,7 +129,7 @@ namespace OvejaNegra.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index","Pedidos");
             }
             return View(pedido);
         }
