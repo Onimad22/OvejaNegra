@@ -94,7 +94,7 @@ namespace OvejaNegra.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,diezc,veintec,cincuentac,unb,dosb,cincob,diezb,veinteb,cincuentab,cienb,doscientosb")] Caja caja)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,diezc,veintec,cincuentac,unb,dosb,cincob,diezb,veinteb,cincuentab,cienb,doscientosb,Total")] Caja caja)
         {
             if (id != caja.Id)
             {
@@ -105,6 +105,8 @@ namespace OvejaNegra.Controllers
             {
                 try
                 {
+                    caja.Total = caja.diezc * 0.1 + caja.veintec * 0.2 + caja.cincuentac * 0.5 + caja.unb * 1 + caja.dosb * 2 + caja.cincob * 5 + caja.diezb * 10 + caja.veinteb * 20 + caja.cincuentab * 50 + caja.cienb * 100 + caja.doscientosb * 200;
+
                     _context.Update(caja);
                     await _context.SaveChangesAsync();
                 }
