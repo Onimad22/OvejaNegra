@@ -15,7 +15,7 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Fecha" class="control-label"></label>
-                <input asp-for="Fecha" class="form-control" />
+                <input asp-for="Fecha" class="form-control" readonly />
                 <span asp-validation-for="Fecha" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -29,29 +29,19 @@
                 <span asp-validation-for="HoraS" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HoraT" class="control-label"></label>
-                <input asp-for="HoraT" class="form-control" />
-                <span asp-validation-for="HoraT" class="text-danger"></span>
+                <input type="hidden" asp-for="HoraT" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Jornal" class="control-label"></label>
-                <input asp-for="Jornal" class="form-control" />
-                <span asp-validation-for="Jornal" class="text-danger"></span>
+                <input type="hidden" asp-for="Jornal" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Bono" class="control-label"></label>
-                <input asp-for="Bono" class="form-control" />
-                <span asp-validation-for="Bono" class="text-danger"></span>
+                <input type="hidden" asp-for="Bono" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Total" class="control-label"></label>
-                <input asp-for="Total" class="form-control" />
-                <span asp-validation-for="Total" class="text-danger"></span>
+                <input type="hidden" asp-for="Total" class="form-control" />
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Pago" /> @Html.DisplayNameFor(model => model.Pago)
-                </label>
+                    <input type="hidden" class="form-check-input" asp-for="Pago" /> 
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
