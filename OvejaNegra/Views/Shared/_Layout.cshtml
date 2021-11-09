@@ -25,16 +25,13 @@
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Compras" asp-action="Index">Compras</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Insumos" asp-action="Index">Insumos</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="Index">Personal</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Cajas" asp-action="Index">Caja</a>
@@ -43,15 +40,13 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Cierres" asp-action="Index">Cierre</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="Index">Personal</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Managers" asp-action="Index">Manager</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Customer</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Insumos" asp-action="Index">Insumos</a>
                             </li>
+
                         }
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
                         {

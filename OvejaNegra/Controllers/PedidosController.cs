@@ -280,6 +280,107 @@ namespace OvejaNegra.Controllers
 
         }
 
+        // GET: Pedidos/Edit/5
+        public IActionResult EditComanda(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var comanda = _context.Comandas
+                .Include(p=>p.Pedido)
+                .Include(p=>p.Producto)
+                .Where(s=>s.Id==id)
+                .FirstOrDefault();
+            if (comanda == null)
+            {
+                return NotFound();
+            }
+
+            var model = new ComandaViewModel
+            {
+                PedidoDelivery = comanda.Pedido.Delivery,
+                ProductoId=comanda.Producto.Id,
+                PedidoId=comanda.Pedido.Id,
+                Cantidad=comanda.Cantidad,
+                Vegetariana=comanda.Vegetariana,
+                Productos = _combosHerlper.GetComboProducto(),
+                Comentarios=comanda.Comentarios
+            };
+
+            return View(model);
+        }
+
+        // POST: Pedidos/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditComanda(int id, [Bind("Id,Comentarios,PedidoId,ProductoId,PedidoDelivery,Cantidad,Vegetariana")] ComandaViewModel model)
+        {
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var comanda = new Comanda();
+                    comanda.Pedido = await _context.Pedidos.FindAsync(model.PedidoId);
+                    comanda.Cantidad = model.Cantidad;
+                    comanda.Producto = await _context.Productos.FindAsync(model.ProductoId);
+                    comanda.Vegetariana = model.Vegetariana;
+                    comanda.Comentarios = model.Comentarios;
+                    comanda.Id = model.Id;
+
+                    var precio = 0.0;
+
+                    if (model.PedidoDelivery == true)
+                    {
+                        precio = comanda.Producto.PrecioDelivery;
+                    }
+                    else
+                    {
+                        precio = comanda.Producto.PrecioLocal;
+                    }
+
+                    var precioBono = comanda.Producto.Bono;
+
+                    comanda.Total = precio * model.Cantidad;
+                    comanda.Bono = precioBono * model.Cantidad;
+
+                    _context.Comandas.Update(comanda);
+                    await _context.SaveChangesAsync();
+
+                    //GUARDAR EL TOTAL EN PEDIDO
+                    var pedido = await _context.Pedidos.FindAsync(model.PedidoId);
+                    var comandas = _context.Comandas.Where(c => c.Pedido == comanda.Pedido);
+                    pedido.Total = comandas.Sum(p => p.Total);
+                    pedido.BonoT = comandas.Sum(b => b.Bono);
+                    _context.Update(pedido);
+                    await _context.SaveChangesAsync();
+
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PedidoExists(model.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Details", "Pedidos", new { id = model.PedidoId });
+            }
+            return View(model);
+        }
+
     }
 
 

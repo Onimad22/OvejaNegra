@@ -20,9 +20,9 @@ namespace OvejaNegra.Controllers
         }
 
         // GET: Managers
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Managers.ToListAsync());
+            return View( _context.Managers.Include(u=>u.User).ToList());
         }
 
         // GET: Managers/Details/5

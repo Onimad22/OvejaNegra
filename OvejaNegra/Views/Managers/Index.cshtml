@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OvejaNegra.Data.Entities.Manager>
+﻿@model IEnumerable<Manager>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,12 +12,20 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User.FullName)
+            </th>
             <th></th>
+
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            >
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

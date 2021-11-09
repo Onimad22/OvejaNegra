@@ -109,13 +109,13 @@ else
                 Carnes:
             </dt>
             <dd class="col-sm-10">
-                @Model.Comandas.Sum(p => p.Producto.Carne)
+                @Model.Comandas.Sum(p => p.Producto.Carne*p.Cantidad)
             </dd>
             <dt class="col-sm-2">
                 Papas:
             </dt>
             <dd class="col-sm-10">
-                @Model.Comandas.Sum(p => p.Producto.Papa)
+                @Model.Comandas.Sum(p => p.Producto.Papa*p.Cantidad)
             </dd>
 
         </dl>

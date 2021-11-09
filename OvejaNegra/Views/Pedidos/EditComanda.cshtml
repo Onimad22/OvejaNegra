@@ -1,0 +1,52 @@
+﻿@model ComandaViewModel
+@{
+    ViewData["Title"] = "EditComanda";
+}
+
+
+<h1>Edit</h1>
+
+<h4>Pedido</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditComanda">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PedidoId" />
+            <input type="hidden" asp-for="PedidoDelivery" />
+
+            <div class="form-group">
+                <label asp-for="ProductoId" class="col-form-label"></label>
+                <select asp-for="ProductoId" asp-items="Model.Productos" class="form-control" autofocus></select>
+                <span asp-validation-for="ProductoId" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Cantidad" class="col-form-label"></label>
+                <input asp-for="Cantidad" class="form-control" id="Cantidad" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Details" asp-route-id="@Model.PedidoId" class="btn btn-success">Back to list</a>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Vegetariana" class="col-form-label"></label>
+                <input asp-for="Vegetariana" class="form-control" />
+                <span asp-validation-for="Vegetariana" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Comentarios" class="col-form-label"></label>
+                <input asp-for="Comentarios" class="form-control" />
+                <span asp-validation-for="Comentarios" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+</div>
+
