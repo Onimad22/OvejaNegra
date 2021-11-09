@@ -14,22 +14,15 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Fecha" class="control-label"></label>
-                <input asp-for="Fecha" class="form-control" />
+                <input asp-for="Fecha" class="form-control"  />
                 <span asp-validation-for="Fecha" class="text-danger"></span>
             </div>
+                <input type="hidden" asp-for="diezc" class="form-control"  value="0" />
+                <input type="hidden" asp-for="veintec" class="form-control" value="0" />
+           
             <div class="form-group">
-                <label asp-for="diezc" class="control-label"></label>
-                <input asp-for="diezc" class="form-control" />
-                <span asp-validation-for="diezc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="veintec" class="control-label"></label>
-                <input asp-for="veintec" class="form-control" />
-                <span asp-validation-for="veintec" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="cincuentac" class="control-label"></label>
-                <input asp-for="cincuentac" class="form-control" />
+                <label asp-for="cincuentac" class="control-label" ></label>
+                <input asp-for="cincuentac" class="form-control"autofocus />
                 <span asp-validation-for="cincuentac" class="text-danger"></span>
             </div>
             <div class="form-group">

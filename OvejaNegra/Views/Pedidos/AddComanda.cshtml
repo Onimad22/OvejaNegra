@@ -14,16 +14,18 @@
             <input type="hidden" asp-for="PedidoId" />
             <input type="hidden" asp-for="PedidoDelivery" />
 
-            <div class="form-group">
-                <label asp-for="Cantidad" class="col-form-label"></label>
-                <input asp-for="Cantidad" class="form-control" value="1" id="Cantidad" autofocus />
-                <span asp-validation-for="Cantidad" class="text-danger"></span>
-            </div>
 
             <div class="form-group">
                 <label asp-for="ProductoId" class="col-form-label"></label>
-                <select asp-for="ProductoId" asp-items="Model.Productos" class="form-control"></select>
+                <select asp-for="ProductoId" asp-items="Model.Productos" class="form-control" autofocus></select>
                 <span asp-validation-for="ProductoId" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Cantidad" class="col-form-label"></label>
+                <input asp-for="Cantidad" class="form-control" value="1" id="Cantidad" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
             </div>
 
 

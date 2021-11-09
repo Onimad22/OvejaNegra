@@ -213,19 +213,38 @@ namespace OvejaNegra.Controllers
         }
 
         // GET: Sueldos/Edit/5
-        public async Task<IActionResult> SueldoEdit(int? id)
+        public IActionResult SueldoEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var sueldo = await _context.Sueldo.FindAsync(id);
+            var sueldo = _context.Sueldo
+                .Include(e => e.Empleado)
+                .Where(s => s.Id == id)
+                //.ToList()
+                //.Find(id.Value)
+                .FirstOrDefault()
+                ;
+
+            var sueldoModel = new SueldoViewModel
+            {
+                
+                Fecha = sueldo.Fecha,
+                HoraE = sueldo.HoraE,
+                HoraS = sueldo.HoraS,
+                EmpleadoId = sueldo.Empleado.Id,
+                Id=sueldo.Id
+            };
+
             if (sueldo == null)
             {
                 return NotFound();
             }
-            return View(sueldo);
+
+
+            return View(sueldoModel) ;
         }
 
         // POST: Sueldos/Edit/5
@@ -233,19 +252,38 @@ namespace OvejaNegra.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SueldoEdit(int id, [Bind("Id,Fecha,HoraE,HoraS,HoraT,Jornal,Bono,Total,Pago")] Sueldo sueldo)
+        public async Task<IActionResult> SueldoEdit(int id, [Bind("Id,Fecha,HoraE,HoraS,EmpleadoId")] SueldoViewModel model)
         {
-            if (id != sueldo.Id)
+            if (id != model.Id)
             {
                 return NotFound();
             }
+
+
+            var bono = _context.Pedidos.Where(c => c.Fecha.Date == model.Fecha.Date);
+            var empleado = _context.Empleado.Find(model.EmpleadoId);
+
+            var sueldo = new Sueldo();
+
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(sueldo);
-                    await _context.SaveChangesAsync();
+                sueldo.Id = model.Id;
+                sueldo.Fecha = model.Fecha;
+                sueldo.HoraE = model.HoraE;
+                sueldo.HoraS = model.HoraS;
+                sueldo.HoraT = (model.HoraS - model.HoraE).TotalHours;
+                sueldo.Bono = bono.Sum(p => p.BonoT);
+                sueldo.Jornal = sueldo.HoraT * empleado.Sueldo;
+                sueldo.Total = sueldo.Bono + sueldo.Jornal;
+                sueldo.Empleado = empleado;
+
+
+                _context.Update(sueldo);
+                await _context.SaveChangesAsync();
+                
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -262,10 +300,42 @@ namespace OvejaNegra.Controllers
             }
             return View(sueldo);
         }
+
+
         private bool SueldoExists(int id)
         {
             return _context.Sueldo.Any(e => e.Id == id);
         }
+
+        // GET: Empleados/Delete/5
+        public async Task<IActionResult> DeleteSueldo(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var empleado = await _context.Sueldo
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (empleado == null)
+            {
+                return NotFound();
+            }
+
+            return View(empleado);
+        }
+
+        // POST: Empleados/Delete/5
+        [HttpPost, ActionName("DeleteSueldo")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteSueldoConfirmed(int id)
+        {
+            var empleado = await _context.Sueldo.FindAsync(id);
+            _context.Sueldo.Remove(empleado);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
 
 
         // GET: PAGAR SUELDOS

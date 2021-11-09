@@ -39,7 +39,6 @@
 <div>
     <a asp-action="AddSueldo" asp-route-id="@Model.Id" class="btn btn-primary">Agregar Sueldo</a> |
     <a asp-action="Index" class="btn btn-secondary">Back to List</a> |
-    <a asp-action="PagarSueldo" asp-route-id="@Model.Id" class="btn btn-danger">Pagar Sueldo</a> |
 
 </div>
 
@@ -105,7 +104,7 @@ else
                     </td>
                     <td>
                         <a asp-action="SueldoEdit" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        <a asp-action="DeleteSueldo" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             }
@@ -114,4 +113,6 @@ else
 
 
 }
+<a asp-action="PagarSueldo" asp-route-id="@Model.Id" class="btn btn-danger">Pagar Sueldo</a> |
+
 

@@ -1,4 +1,4 @@
-﻿@model OvejaNegra.Data.Entities.Sueldo
+﻿@model SueldoViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -13,6 +13,7 @@
         <form asp-action="SueldoEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="EmpleadoId" />
             <div class="form-group">
                 <label asp-for="Fecha" class="control-label"></label>
                 <input asp-for="Fecha" class="form-control" readonly />
@@ -41,7 +42,7 @@
                 <input type="hidden" asp-for="Total" class="form-control" />
             </div>
             <div class="form-group form-check">
-                    <input type="hidden" class="form-check-input" asp-for="Pago" /> 
+                <input type="hidden" class="form-check-input" asp-for="Pago" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
