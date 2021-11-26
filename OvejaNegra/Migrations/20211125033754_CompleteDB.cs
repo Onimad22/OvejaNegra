@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OvejaNegra.Migrations
 {
-    public partial class InitialDB : Migration
+    public partial class CompleteDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -157,6 +157,20 @@ namespace OvejaNegra.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Productos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transferencia",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Total = table.Column<double>(type: "float", nullable: false),
+                    Fecha = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transferencia", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -518,6 +532,9 @@ namespace OvejaNegra.Migrations
 
             migrationBuilder.DropTable(
                 name: "SueldosPago");
+
+            migrationBuilder.DropTable(
+                name: "Transferencia");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

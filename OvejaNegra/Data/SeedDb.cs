@@ -149,8 +149,117 @@ namespace OvejaNegra.Data
                     Categoria = "Hamburguesa"
                 });
 
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Carne",
+                    Categoria = "Hamburguesa"
+                });
 
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Pan",
+                    Categoria = "Hamburguesa"
+                });
 
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Lechuga",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Pepinillo",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Salsa Golf",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Mayonesa",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Mostaza",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Servilleta",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Papa",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Cebolla",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Aceite",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Sal",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Pimienta",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Paprika",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Leche",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Crema de leche",
+                    Categoria = "Hamburguesa"
+                });
+
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Limon",
+                    Categoria = "Hamburguesa"
+                });
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Cilantro",
+                    Categoria = "Hamburguesa"
+                });
+                _context.Insumos.Add(new Insumo
+                {
+                    Nombre = "Soda",
+                    Categoria = "Soda"
+                });
                 await _context.SaveChangesAsync();
             }
         }
@@ -159,62 +268,346 @@ namespace OvejaNegra.Data
         {
             if (!_context.Productos.Any())
             {
-                _context.Productos.Add(new Producto
-                {
-                    Nombre = "Gri CS",
-                    PrecioLocal = 19,
-                    PrecioDelivery = 22,
-                    Carne=1,
-                    Papa=1,
-                    Bono=0.5,
-                    Categoria = "Hamburguesa"
-                });
 
                 _context.Productos.Add(new Producto
                 {
-                    Nombre = "Bbq CD",
-                    PrecioLocal = 36,
-                    PrecioDelivery = 39,
-                    Carne=2,
-                    Papa=1,
-                    Bono=0.5,
-                    Categoria = "Hamburguesa"
-                });;
-
-                _context.Productos.Add(new Producto
-                {
-                    Nombre = "Gau SS",
-                    PrecioLocal = 22,
-                    PrecioDelivery = 25,
-                    Carne=1,
-                    Papa=0,
-                    Bono=0.25,
-                    Categoria = "Hamburguesa"
-                });
-
-                _context.Productos.Add(new Producto
-                {
-                    Nombre = "Papa",
+                    Nombre = "PAPA",
                     PrecioLocal = 9,
-                    PrecioDelivery = 12,
+                    PrecioDelivery = 0,
                     Carne=0,
                     Papa=1,
                     Bono=0.25,
                     Categoria = "Hamburguesa"
                 });
+
+                #region Hamburguesas
+
+                #region gringa
                 _context.Productos.Add(new Producto
                 {
-                    Nombre = "Guarana",
+                    Nombre = "aGRI SS",
+                    PrecioLocal = 19,
+                    PrecioDelivery = 0,
+                    Carne = 1,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aGRI CS",
+                    PrecioLocal = 28,
+                    PrecioDelivery = 0,
+                    Carne = 1,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "Hamburguesa"
+                }); ;
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aGRI SD",
+                    PrecioLocal = 29,
+                    PrecioDelivery = 0,
+                    Carne = 2,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aGRI CD",
+                    PrecioLocal = 38,
+                    PrecioDelivery = 0,
+                    Carne = 2,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "Hamburguesa"
+                });
+                #endregion
+                #region Gaucha
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aGAU SS",
+                    PrecioLocal = 25,
+                    PrecioDelivery = 0,
+                    Carne = 1,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aGAU CS",
+                    PrecioLocal = 34,
+                    PrecioDelivery = 0,
+                    Carne = 1,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "Hamburguesa"
+                }); ;
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aGAU SD",
+                    PrecioLocal = 35,
+                    PrecioDelivery = 0,
+                    Carne = 2,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aGAU CD",
+                    PrecioLocal = 44,
+                    PrecioDelivery = 0,
+                    Carne = 2,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "Hamburguesa"
+                });
+
+                #endregion
+                #region BBQ
+
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aBBQ SS",
+                    PrecioLocal = 27,
+                    PrecioDelivery = 0,
+                    Carne = 1,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aBBQ CS",
+                    PrecioLocal = 36,
+                    PrecioDelivery = 0,
+                    Carne = 1,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "Hamburguesa"
+                }); ;
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aBBQ SD",
+                    PrecioLocal = 37,
+                    PrecioDelivery = 0,
+                    Carne = 2,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aBBQ CD",
+                    PrecioLocal = 46,
+                    PrecioDelivery = 0,
+                    Carne = 2,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "Hamburguesa"
+                });
+                #endregion
+                #region Fort
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aFORT SS",
+                    PrecioLocal = 27,
+                    PrecioDelivery = 0,
+                    Carne = 1,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aFORT CS",
+                    PrecioLocal = 36,
+                    PrecioDelivery = 0,
+                    Carne = 1,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "Hamburguesa"
+                }); ;
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aFORT SD",
+                    PrecioLocal = 37,
+                    PrecioDelivery = 0,
+                    Carne = 2,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aFORT CD",
+                    PrecioLocal = 46,
+                    PrecioDelivery = 0,
+                    Carne = 2,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "Hamburguesa"
+                });
+                #endregion
+                #region Austriaca
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aAUS SS",
+                    PrecioLocal = 29,
+                    PrecioDelivery = 0,
+                    Carne = 1,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aAUS CS",
+                    PrecioLocal = 38,
+                    PrecioDelivery = 0,
+                    Carne = 1,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "Hamburguesa"
+                }); ;
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aAUS SD",
+                    PrecioLocal = 39,
+                    PrecioDelivery = 0,
+                    Carne = 2,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aAUS CD",
+                    PrecioLocal = 48,
+                    PrecioDelivery = 0,
+                    Carne = 2,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "Hamburguesa"
+                });
+                #endregion
+                #region Alemana
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aALE SS",
+                    PrecioLocal = 35,
+                    PrecioDelivery = 0,
+                    Carne = 1,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aALE CS",
+                    PrecioLocal = 44,
+                    PrecioDelivery = 0,
+                    Carne = 1,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "Hamburguesa"
+                }); ;
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aALE SD",
+                    PrecioLocal = 45,
+                    PrecioDelivery = 0,
+                    Carne = 2,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "aALE CD",
+                    PrecioLocal = 54,
+                    PrecioDelivery = 0,
+                    Carne = 2,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "Hamburguesa"
+                });
+                #endregion
+
+
+                #endregion
+
+                #region Soda
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "bGUARANA",
                     PrecioLocal = 8,
                     PrecioDelivery = 8,
-                    Carne=0,
-                    Papa=0,
-                    Bono=0,
+                    Carne = 0,
+                    Papa = 0,
+                    Bono = 0,
                     Categoria = "Soda"
                 });
                 _context.Productos.Add(new Producto
                 {
-                    Nombre = "Carne",
+                    Nombre = "bNARANJA",
+                    PrecioLocal = 8,
+                    PrecioDelivery = 8,
+                    Carne = 0,
+                    Papa = 0,
+                    Bono = 0,
+                    Categoria = "Soda"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "bCOCA COLA",
+                    PrecioLocal = 8,
+                    PrecioDelivery = 8,
+                    Carne = 0,
+                    Papa = 0,
+                    Bono = 0,
+                    Categoria = "Soda"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "bSPRITE",
+                    PrecioLocal = 8,
+                    PrecioDelivery = 8,
+                    Carne = 0,
+                    Papa = 0,
+                    Bono = 0,
+                    Categoria = "Soda"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "bAGUA",
+                    PrecioLocal = 8,
+                    PrecioDelivery = 8,
+                    Carne = 0,
+                    Papa = 0,
+                    Bono = 0,
+                    Categoria = "Soda"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "bAGUA C GAS",
+                    PrecioLocal = 8,
+                    PrecioDelivery = 8,
+                    Carne = 0,
+                    Papa = 0,
+                    Bono = 0,
+                    Categoria = "Soda"
+                });
+
+                #endregion
+
+                #region Extra
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "eCARNE",
                     PrecioLocal = 10,
                     PrecioDelivery = 10,
                     Carne=1,
@@ -222,8 +615,40 @@ namespace OvejaNegra.Data
                     Bono=0,
                     Categoria = "Hamburguesa"
                 });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "eCHEDAR/PROVO",
+                    PrecioLocal = 4,
+                    PrecioDelivery = 4,
+                    Carne = 1,
+                    Papa = 1,
+                    Bono = 0,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "eFORT/SUI",
+                    PrecioLocal = 7,
+                    PrecioDelivery = 7,
+                    Carne = 1,
+                    Papa = 1,
+                    Bono = 0,
+                    Categoria = "Hamburguesa"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "eTOCINO",
+                    PrecioLocal = 6,
+                    PrecioDelivery = 6,
+                    Carne = 1,
+                    Papa = 1,
+                    Bono = 0,
+                    Categoria = "Hamburguesa"
+                });
+
 
                 await _context.SaveChangesAsync();
+                #endregion
             }
 
         }
