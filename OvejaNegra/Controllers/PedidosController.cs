@@ -28,8 +28,9 @@ namespace OvejaNegra.Controllers
         {
             var fecha = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0)).Date;
 
-            var model = _context.Pedidos.Include(p => p.Comandas).Where(f => f.Fecha.Date == fecha).Where(c => c.Cerrado == false).ToList();
+           // var model = _context.Pedidos.Include(p => p.Comandas).Where(f => f.Fecha.Date == fecha).Where(c => c.Cerrado == false).ToList();
 
+            var model = _context.Pedidos.Include(p => p.Comandas).Where(f => f.Fecha.Date == fecha).ToList();
             return View(model);
         }
 
@@ -104,7 +105,7 @@ namespace OvejaNegra.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Mesa,Fecha,Hora,Preparando,Delivery,Pago,Cerrado,Total")] Pedido pedido)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Mesa,Fecha,Hora,Preparando,Delivery,Pago,Cerrado,Total,BonoT")] Pedido pedido)
         {
             if (id != pedido.Id)
             {
