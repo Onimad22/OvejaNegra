@@ -58,13 +58,29 @@ namespace OvejaNegra.Helpers
 
         public IEnumerable<SelectListItem> GetComboProducto()
         {
-            var lista = _context.Productos.Select(p => new SelectListItem
-            {
-                Text = p.Nombre,
-                Value = $"{p.Id}"
-            })
-                .OrderBy(p => p.Text)
+
+            var list = _context.Productos
+                .OrderBy(d=>d.Categoria)
+                .ThenBy(d=>d.Nombre)
                 .ToList();
+
+            List<SelectListItem> lista = list.ConvertAll(d =>
+              {
+                  return new SelectListItem()
+                  {
+                      Text = d.Nombre,
+                      Value = d.Id.ToString()
+                  };
+  
+              });
+            
+            //var lista = _context.Productos.Select(p => new SelectListItem
+            //{
+            //    Text = p.Nombre,
+            //    Value = $"{p.Id}"
+            //})
+            //    .OrderBy(p => p.Text)
+            //    .ToList();
 
             lista.Insert(0, new SelectListItem
             {
