@@ -23,9 +23,10 @@ namespace OvejaNegra.Controllers
         public async Task<IActionResult> Index()
         {
             var fechaHoy = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0)).Date;
-            var fechaAyer = DateTimeOffset.Now.AddDays(-1).Date;
+            //var fechaAyer = DateTimeOffset.Now.AddDays(-1).Date;
 
-            
+            var fechaAyer = fechaHoy.AddDays(-1).Date;
+
 
             return View(await _context.Caja.Where(f=>f.Fecha.Date==fechaAyer || f.Fecha.Date==fechaHoy).ToListAsync());
         }

@@ -28,7 +28,18 @@ namespace OvejaNegra.Controllers
         {
             var fecha = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0)).Date;
 
-           // var model = _context.Pedidos.Include(p => p.Comandas).Where(f => f.Fecha.Date == fecha).Where(c => c.Cerrado == false).ToList();
+            var model = _context.Pedidos.Include(p => p.Comandas).Where(f => f.Fecha.Date == fecha).Where(c => c.Cerrado == false).ToList();
+
+            //var model = _context.Pedidos.Include(p => p.Comandas).Where(f => f.Fecha.Date == fecha).ToList();
+            return View(model);
+        }
+
+        // GET: Pedidos
+        public IActionResult IndexTodos()
+        {
+            var fecha = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0)).Date;
+
+            //var model = _context.Pedidos.Include(p => p.Comandas).Where(f => f.Fecha.Date == fecha).Where(c => c.Cerrado == false).ToList();
 
             var model = _context.Pedidos.Include(p => p.Comandas).Where(f => f.Fecha.Date == fecha).ToList();
             return View(model);

@@ -27,12 +27,12 @@ namespace OvejaNegra.Data
             await CheckManagerAsync(manager);
             await CheckCustomerAsync(customer);
             await CheckProductosAsync();
-            await CheckPedidosAsync();
-            await CheckComandaAsync();
+           // await CheckPedidosAsync();
+           // await CheckComandaAsync();
             await CheckInsumoAsync();
-            await CheckCompraAsync();
-            await CheckCajaAsync();
-            await CheckCierreAsync();
+           // await CheckCompraAsync();
+            //await CheckCajaAsync();
+           // await CheckCierreAsync();
 
         }
 
