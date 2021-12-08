@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OvejaNegra.Data;
 using OvejaNegra.Data.Entities;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OvejaNegra.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CajasController : Controller
     {
         private readonly DataContext _context;
@@ -28,13 +28,13 @@ namespace OvejaNegra.Controllers
             var fechaAyer = fechaHoy.AddDays(-1).Date;
 
 
-            return View(await _context.Caja.Where(f=>f.Fecha.Date==fechaAyer || f.Fecha.Date==fechaHoy).ToListAsync());
+            return View(await _context.Caja.Where(f => f.Fecha.Date == fechaAyer || f.Fecha.Date == fechaHoy).ToListAsync());
         }
 
         // GET: Cajas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-           
+
             if (id == null)
             {
                 return NotFound();
@@ -65,7 +65,7 @@ namespace OvejaNegra.Controllers
         {
             if (ModelState.IsValid)
             {
-                caja.Total = caja.diezc * 0.1+caja.veintec*0.2+caja.cincuentac*0.5+caja.unb*1+caja.dosb*2+caja.cincob*5+caja.diezb*10+caja.veinteb*20+caja.cincuentab*50+caja.cienb*100+caja.doscientosb*200;
+                caja.Total = caja.diezc * 0.1 + caja.veintec * 0.2 + caja.cincuentac * 0.5 + caja.unb * 1 + caja.dosb * 2 + caja.cincob * 5 + caja.diezb * 10 + caja.veinteb * 20 + caja.cincuentab * 50 + caja.cienb * 100 + caja.doscientosb * 200;
 
                 _context.Add(caja);
                 await _context.SaveChangesAsync();

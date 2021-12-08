@@ -297,7 +297,7 @@ namespace OvejaNegra.Data
                 {
                     Nombre = "GRI CS",
                     PrecioLocal = 28,
-                    PrecioDelivery = 32,
+                    PrecioDelivery = 30,
                     Carne = 1,
                     Papa = 1,
                     Bono = 0.5,
@@ -317,7 +317,7 @@ namespace OvejaNegra.Data
                 {
                     Nombre = "GRI CD",
                     PrecioLocal = 38,
-                    PrecioDelivery = 42,
+                    PrecioDelivery = 40,
                     Carne = 2,
                     Papa = 1,
                     Bono = 0.5,
@@ -329,7 +329,7 @@ namespace OvejaNegra.Data
                 {
                     Nombre = "GAU SS",
                     PrecioLocal = 25,
-                    PrecioDelivery = 0,
+                    PrecioDelivery = 28,
                     Carne = 1,
                     Papa = 0,
                     Bono = 0.25,
@@ -339,7 +339,7 @@ namespace OvejaNegra.Data
                 {
                     Nombre = "GAU CS",
                     PrecioLocal = 34,
-                    PrecioDelivery = 0,
+                    PrecioDelivery = 38,
                     Carne = 1,
                     Papa = 1,
                     Bono = 0.5,
@@ -393,7 +393,7 @@ namespace OvejaNegra.Data
                 {
                     Nombre = "BBQ SD",
                     PrecioLocal = 37,
-                    PrecioDelivery = 40,
+                    PrecioDelivery = 44,
                     Carne = 2,
                     Papa = 0,
                     Bono = 0.25,
@@ -403,7 +403,7 @@ namespace OvejaNegra.Data
                 {
                     Nombre = "BBQ CD",
                     PrecioLocal = 46,
-                    PrecioDelivery = 49,
+                    PrecioDelivery = 53,
                     Carne = 2,
                     Papa = 1,
                     Bono = 0.5,
@@ -517,8 +517,8 @@ namespace OvejaNegra.Data
                 }); ;
                 _context.Productos.Add(new Producto
                 {
-                    Nombre = "ALE SD",
-                    PrecioLocal = 45,
+                    Nombre = "ALE SS(s/chori)",
+                    PrecioLocal = 29,
                     PrecioDelivery = 0,
                     Carne = 2,
                     Papa = 0,
@@ -527,8 +527,8 @@ namespace OvejaNegra.Data
                 });
                 _context.Productos.Add(new Producto
                 {
-                    Nombre = "ALE CD",
-                    PrecioLocal = 54,
+                    Nombre = "ALE CS(s/chori)",
+                    PrecioLocal = 38,
                     PrecioDelivery = 0,
                     Carne = 2,
                     Papa = 1,
@@ -541,7 +541,7 @@ namespace OvejaNegra.Data
                 {
                     Nombre = "MEX SS",
                     PrecioLocal = 32,
-                    PrecioDelivery = 0,
+                    PrecioDelivery = 35,
                     Carne = 1,
                     Papa = 0,
                     Bono = 0.25,
@@ -551,7 +551,7 @@ namespace OvejaNegra.Data
                 {
                     Nombre = "MEX CS",
                     PrecioLocal = 41,
-                    PrecioDelivery = 0,
+                    PrecioDelivery = 44,
                     Carne = 1,
                     Papa = 1,
                     Bono = 0.5,
@@ -561,7 +561,7 @@ namespace OvejaNegra.Data
                 {
                     Nombre = "MEX SD",
                     PrecioLocal = 42,
-                    PrecioDelivery = 0,
+                    PrecioDelivery = 49,
                     Carne = 2,
                     Papa = 0,
                     Bono = 0.25,
@@ -571,7 +571,91 @@ namespace OvejaNegra.Data
                 {
                     Nombre = "MEX CD",
                     PrecioLocal = 51,
-                    PrecioDelivery = 0,
+                    PrecioDelivery = 58,
+                    Carne = 2,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "a"
+                });
+                #endregion
+                #region Especial
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "ESP SS",
+                    PrecioLocal = 32,
+                    PrecioDelivery = 35,
+                    Carne = 1,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "a"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "ESP CS",
+                    PrecioLocal = 41,
+                    PrecioDelivery = 44,
+                    Carne = 1,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "a"
+                }); ;
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "ESP SD",
+                    PrecioLocal = 42,
+                    PrecioDelivery = 49,
+                    Carne = 2,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "a"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "ESP CD",
+                    PrecioLocal = 51,
+                    PrecioDelivery = 58,
+                    Carne = 2,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "a"
+                });
+                #endregion
+                #region Vegetariana
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "VEG SS",
+                    PrecioLocal = 32,
+                    PrecioDelivery = 35,
+                    Carne = 1,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "a"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "VEG CS",
+                    PrecioLocal = 41,
+                    PrecioDelivery = 44,
+                    Carne = 1,
+                    Papa = 1,
+                    Bono = 0.5,
+                    Categoria = "a"
+                }); ;
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "VEG SD",
+                    PrecioLocal = 42,
+                    PrecioDelivery = 49,
+                    Carne = 2,
+                    Papa = 0,
+                    Bono = 0.25,
+                    Categoria = "a"
+                });
+                _context.Productos.Add(new Producto
+                {
+                    Nombre = "VEG CD",
+                    PrecioLocal = 51,
+                    PrecioDelivery = 58,
                     Carne = 2,
                     Papa = 1,
                     Bono = 0.5,
@@ -682,7 +766,7 @@ namespace OvejaNegra.Data
                 {
                     Nombre = "CARNE",
                     PrecioLocal = 10,
-                    PrecioDelivery = 10,
+                    PrecioDelivery = 14,
                     Carne=1,
                     Papa=1,
                     Bono=0,

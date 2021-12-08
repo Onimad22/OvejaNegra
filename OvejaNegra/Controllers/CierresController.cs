@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OvejaNegra.Data;
 using OvejaNegra.Data.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OvejaNegra.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CierresController : Controller
     {
         private readonly DataContext _context;
@@ -53,7 +54,7 @@ namespace OvejaNegra.Controllers
 
             var cajaA = new Caja { Total = 0 };
             var cajaH = new Caja { Total = 0 };
-            var listaSueldos=new List<SueldoPago>();
+            var listaSueldos = new List<SueldoPago>();
             var compras = 0.0;
             var ventas = 0.0;
             var sueldos = 0.0;
@@ -67,7 +68,7 @@ namespace OvejaNegra.Controllers
 
             if (_context.Pedidos.FirstOrDefault(f => f.Fecha.Date == fechaHoy) != null)
             {
-               var venta = _context.Pedidos.Where(f => f.Fecha.Date == fechaHoy);
+                var venta = _context.Pedidos.Where(f => f.Fecha.Date == fechaHoy);
                 ventas = venta.Sum(s => s.Total);
             }
 

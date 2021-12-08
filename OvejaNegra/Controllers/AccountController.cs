@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using OvejaNegra.Helpers;
 using OvejaNegra.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace OvejaNegra.Controllers
 {
+    
     public class AccountController : Controller
     {
         private readonly IUserHelper _userHelper;
@@ -59,7 +58,7 @@ namespace OvejaNegra.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-       
+
         public IActionResult NotAuthorized()
         {
             return View();

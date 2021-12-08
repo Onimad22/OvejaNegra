@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OvejaNegra.Data;
 using OvejaNegra.Data.Entities;
 using OvejaNegra.Helpers;
 using OvejaNegra.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OvejaNegra.Controllers
 {
+    [Authorize(Roles = "Admin , Customer")]
+
     public class PedidosController : Controller
     {
         private readonly DataContext _context;
         private readonly ICombosHelper _combosHerlper;
 
-        public PedidosController(DataContext context,ICombosHelper combosHerlper)
+        public PedidosController(DataContext context, ICombosHelper combosHerlper)
         {
             _context = context;
             _combosHerlper = combosHerlper;
@@ -54,8 +55,8 @@ namespace OvejaNegra.Controllers
             }
 
             var pedido = await _context.Pedidos
-                .Include(c=>c.Comandas)
-                .ThenInclude(p=>p.Producto)
+                .Include(c => c.Comandas)
+                .ThenInclude(p => p.Producto)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (pedido == null)
             {
@@ -81,15 +82,15 @@ namespace OvejaNegra.Controllers
 
             var fecha = DateTimeOffset.Now;
             var fechalocal = fecha.ToOffset(new TimeSpan(-4, 0, 0));
-            
+
             model.Fecha = fechalocal;
-            
+
             if (ModelState.IsValid)
             {
                 _context.Add(model);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Details", "Pedidos", new { id = model.Id });
+                return RedirectToAction("AddComanda", "Pedidos", new { id = model.Id });
                 //return RedirectToAction(nameof(Index));
             }
             return View(model);
@@ -141,7 +142,7 @@ namespace OvejaNegra.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index","Pedidos");
+                return RedirectToAction("Index", "Pedidos");
             }
             return View(pedido);
         }
@@ -216,10 +217,10 @@ namespace OvejaNegra.Controllers
                 comanda.Producto = await _context.Productos.FindAsync(model.ProductoId);
                 comanda.Vegetariana = model.Vegetariana;
                 comanda.Comentarios = model.Comentarios;
-                
+
                 var precio = 0.0;
-                
-                if (model.PedidoDelivery==true)
+
+                if (model.PedidoDelivery == true)
                 {
                     precio = comanda.Producto.PrecioDelivery;
                 }
@@ -244,11 +245,11 @@ namespace OvejaNegra.Controllers
                 _context.Update(pedido);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Details", "Pedidos", new { id = model.PedidoId });
+                return RedirectToAction("AddComanda", "Pedidos", new { id = model.PedidoId });
 
-                
 
-              
+
+
 
             }
             return View(model);
@@ -277,7 +278,7 @@ namespace OvejaNegra.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteComandaConfirmed(int id)
         {
-            var comanda = await _context.Comandas.Include(c=>c.Pedido).FirstOrDefaultAsync(m => m.Id == id);
+            var comanda = await _context.Comandas.Include(c => c.Pedido).FirstOrDefaultAsync(m => m.Id == id);
             _context.Comandas.Remove(comanda);
             await _context.SaveChangesAsync();
 
@@ -301,9 +302,9 @@ namespace OvejaNegra.Controllers
             }
 
             var comanda = _context.Comandas
-                .Include(p=>p.Pedido)
-                .Include(p=>p.Producto)
-                .Where(s=>s.Id==id)
+                .Include(p => p.Pedido)
+                .Include(p => p.Producto)
+                .Where(s => s.Id == id)
                 .FirstOrDefault();
             if (comanda == null)
             {
@@ -313,12 +314,12 @@ namespace OvejaNegra.Controllers
             var model = new ComandaViewModel
             {
                 PedidoDelivery = comanda.Pedido.Delivery,
-                ProductoId=comanda.Producto.Id,
-                PedidoId=comanda.Pedido.Id,
-                Cantidad=comanda.Cantidad,
-                Vegetariana=comanda.Vegetariana,
+                ProductoId = comanda.Producto.Id,
+                PedidoId = comanda.Pedido.Id,
+                Cantidad = comanda.Cantidad,
+                Vegetariana = comanda.Vegetariana,
                 Productos = _combosHerlper.GetComboProducto(),
-                Comentarios=comanda.Comentarios
+                Comentarios = comanda.Comentarios
             };
 
             return View(model);

@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OvejaNegra.Data;
 using OvejaNegra.Data.Entities;
 using OvejaNegra.Helpers;
 using OvejaNegra.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OvejaNegra.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class EmpleadosController : Controller
     {
         private readonly DataContext _context;
@@ -38,7 +38,7 @@ namespace OvejaNegra.Controllers
             }
 
             var empleado = await _context.Empleado
-                .Include(s=>s.Sueldos.Where(p=>p.Pago==false))
+                .Include(s => s.Sueldos.Where(p => p.Pago == false))
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (empleado == null)
             {
@@ -172,8 +172,8 @@ namespace OvejaNegra.Controllers
             var model = new SueldoViewModel
             {
 
-                
-                EmpleadoId=empleado.Id,
+
+                EmpleadoId = empleado.Id,
 
             };
 
@@ -230,12 +230,12 @@ namespace OvejaNegra.Controllers
 
             var sueldoModel = new SueldoViewModel
             {
-                
+
                 Fecha = sueldo.Fecha,
                 HoraE = sueldo.HoraE,
                 HoraS = sueldo.HoraS,
                 EmpleadoId = sueldo.Empleado.Id,
-                Id=sueldo.Id
+                Id = sueldo.Id
             };
 
             if (sueldo == null)
@@ -244,7 +244,7 @@ namespace OvejaNegra.Controllers
             }
 
 
-            return View(sueldoModel) ;
+            return View(sueldoModel);
         }
 
         // POST: Sueldos/Edit/5
@@ -270,20 +270,20 @@ namespace OvejaNegra.Controllers
             {
                 try
                 {
-                sueldo.Id = model.Id;
-                sueldo.Fecha = model.Fecha;
-                sueldo.HoraE = model.HoraE;
-                sueldo.HoraS = model.HoraS;
-                sueldo.HoraT = (model.HoraS - model.HoraE).TotalHours;
-                sueldo.Bono = bono.Sum(p => p.BonoT);
-                sueldo.Jornal = sueldo.HoraT * empleado.Sueldo;
-                sueldo.Total = sueldo.Bono + sueldo.Jornal;
-                sueldo.Empleado = empleado;
+                    sueldo.Id = model.Id;
+                    sueldo.Fecha = model.Fecha;
+                    sueldo.HoraE = model.HoraE;
+                    sueldo.HoraS = model.HoraS;
+                    sueldo.HoraT = (model.HoraS - model.HoraE).TotalHours;
+                    sueldo.Bono = bono.Sum(p => p.BonoT);
+                    sueldo.Jornal = sueldo.HoraT * empleado.Sueldo;
+                    sueldo.Total = sueldo.Bono + sueldo.Jornal;
+                    sueldo.Empleado = empleado;
 
 
-                _context.Update(sueldo);
-                await _context.SaveChangesAsync();
-                
+                    _context.Update(sueldo);
+                    await _context.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -349,7 +349,7 @@ namespace OvejaNegra.Controllers
             var sueldo = _context.Sueldo
                 .Include(s => s.Empleado)
                 .Where(m => m.Empleado.Id == id)
-                .Where(p=>p.Pago==false).ToList();
+                .Where(p => p.Pago == false).ToList();
             if (sueldo == null)
             {
                 return NotFound();
@@ -360,10 +360,10 @@ namespace OvejaNegra.Controllers
             {
 
                 item.Pago = true;
-                
 
-                    _context.Update(item);
-                   await _context.SaveChangesAsync();
+
+                _context.Update(item);
+                await _context.SaveChangesAsync();
 
             }
 
@@ -372,7 +372,7 @@ namespace OvejaNegra.Controllers
 
             sueldoPago.Fecha = fecha;
             sueldoPago.Total = sueldo.Sum(s => s.Total);
-            sueldoPago.Empleado= _context.Empleado.Find(id);
+            sueldoPago.Empleado = _context.Empleado.Find(id);
 
             _context.SueldosPago.Add(sueldoPago);
             await _context.SaveChangesAsync();

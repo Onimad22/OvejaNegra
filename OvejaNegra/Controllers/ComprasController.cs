@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OvejaNegra.Data;
 using OvejaNegra.Data.Entities;
 using OvejaNegra.Helpers;
 using OvejaNegra.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OvejaNegra.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ComprasController : Controller
     {
         private readonly DataContext _context;
@@ -28,7 +28,7 @@ namespace OvejaNegra.Controllers
         {
             var fecha = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0)).Date;
 
-            return View(await _context.Compras.Include(i=>i.Insumo).Where(f => f.Fecha.Date == fecha).ToListAsync());
+            return View(await _context.Compras.Include(i => i.Insumo).Where(f => f.Fecha.Date == fecha).ToListAsync());
         }
 
         // GET: Compras/Details/5
@@ -54,9 +54,9 @@ namespace OvejaNegra.Controllers
         {
             var model = new CompraViewModel
             {
-                
+
                 Insumos = _combosHerlper.GetComboInsumo(),
-                
+
             };
 
             return View(model);
@@ -82,7 +82,7 @@ namespace OvejaNegra.Controllers
 
                 _context.Add(compra);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
             return View(model);
         }
