@@ -4,29 +4,18 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>Cierre</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group ">
-                <label asp-for="Fecha" class="control-label"></label>
-                <input asp-for="Fecha" class="form-control" readonly/>
-                <span asp-validation-for="Fecha" class="text-danger"></span>
-            </div>
-            <div class="form-group ">
-                <label asp-for="CajaAyer" class="control-label"></label>
-                <input asp-for="CajaAyer" class="form-control" readonly />
-                <span asp-validation-for="CajaAyer" class="text-danger"></span>
-            </div>
-            <div class="form-group ">
-                <label asp-for="CajaHoy" class="control-label"></label>
-                <input asp-for="CajaHoy" class="form-control"readonly />
-                <span asp-validation-for="CajaHoy" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="Fecha" />
+            <input type="hidden" asp-for="CajaAyer" />
+            <input type="hidden" asp-for="CajaHoy" />
+            <input type="hidden" asp-for="Sueldos" />
+
+           
             <div class="form-group ">
                 <label asp-for="Ventas" class="control-label"></label>
                 <input asp-for="Ventas" class="form-control" readonly/>
@@ -38,9 +27,9 @@
                 <span asp-validation-for="Compras" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Sueldos" class="control-label"></label>
-                <input asp-for="Sueldos" class="form-control" readonly />
-                <span asp-validation-for="Sueldos" class="text-danger"></span>
+                <label asp-for="Bono" class="control-label"></label>
+                <input asp-for="Bono" class="form-control" readonly />
+                <span asp-validation-for="Bono" class="text-danger"></span>
             </div>
 
             <div class="form-group enable">

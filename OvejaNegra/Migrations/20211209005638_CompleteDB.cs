@@ -85,7 +85,8 @@ namespace OvejaNegra.Migrations
                     Ventas = table.Column<double>(type: "float", nullable: false),
                     Compras = table.Column<double>(type: "float", nullable: false),
                     Sueldos = table.Column<double>(type: "float", nullable: false),
-                    Balance = table.Column<double>(type: "float", nullable: false)
+                    Balance = table.Column<double>(type: "float", nullable: false),
+                    Bono = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {

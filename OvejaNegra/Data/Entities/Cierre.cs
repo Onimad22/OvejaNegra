@@ -32,5 +32,7 @@ namespace OvejaNegra.Data.Entities
         [Display(Name = "Cierre")]
         public double Balance { get; set; }
 
+        public double Bono { get; set; }
+
     }
 }

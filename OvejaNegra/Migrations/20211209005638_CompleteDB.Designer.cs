@@ -10,7 +10,7 @@ using OvejaNegra.Data;
 namespace OvejaNegra.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211125033754_CompleteDB")]
+    [Migration("20211209005638_CompleteDB")]
     partial class CompleteDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -211,6 +211,9 @@ namespace OvejaNegra.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<double>("Balance")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Bono")
                         .HasColumnType("float");
 
                     b.Property<double>("CajaAyer")

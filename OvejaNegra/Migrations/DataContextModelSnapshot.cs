@@ -211,6 +211,9 @@ namespace OvejaNegra.Migrations
                     b.Property<double>("Balance")
                         .HasColumnType("float");
 
+                    b.Property<double>("Bono")
+                        .HasColumnType("float");
+
                     b.Property<double>("CajaAyer")
                         .HasColumnType("float");
 

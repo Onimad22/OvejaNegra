@@ -59,6 +59,7 @@ namespace OvejaNegra.Controllers
             var ventas = 0.0;
             var sueldos = 0.0;
             var transferencias = 0.0;
+            var bono = _context.Pedidos.Where(c => c.Fecha.Date == fechaHoy.Date);
 
             if (_context.Compras.FirstOrDefault(f => f.Fecha.Date == fechaHoy) != null)
             {
@@ -94,6 +95,7 @@ namespace OvejaNegra.Controllers
                 transferencias = transferencia.Sum(f => f.Total);
             }
 
+
             var cierre = new Cierre();
 
             cierre.CajaAyer = cajaA.Total;
@@ -101,6 +103,8 @@ namespace OvejaNegra.Controllers
             cierre.Ventas = ventas;
             cierre.Compras = compras;
             cierre.Sueldos = sueldos;
+
+            cierre.Bono = bono.Sum(p => p.BonoT);
 
             cierre.Fecha = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0));
             cierre.Balance = (cierre.CajaAyer + cierre.Ventas - cierre.Compras - transferencias - cierre.CajaHoy - cierre.Sueldos) * -1;
