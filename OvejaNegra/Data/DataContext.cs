@@ -27,7 +27,7 @@ namespace OvejaNegra.Data
         public DbSet<SueldoPago> SueldosPago { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<OvejaNegra.Data.Entities.Transferencia> Transferencia { get; set; }
+        public DbSet<Transferencia> Transferencia { get; set; }
 
 
     }

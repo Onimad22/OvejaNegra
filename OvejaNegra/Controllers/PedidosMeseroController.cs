@@ -1,24 +1,25 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OvejaNegra.Data;
 using OvejaNegra.Data.Entities;
 using OvejaNegra.Helpers;
 using OvejaNegra.Models;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OvejaNegra.Controllers
 {
-    [Authorize(Roles = "Admin")]
-
-    public class PedidosController : Controller
+    [Authorize(Roles = "Customer")]
+    public class PedidosMeseroController : Controller
     {
         private readonly DataContext _context;
         private readonly ICombosHelper _combosHerlper;
 
-        public PedidosController(DataContext context, ICombosHelper combosHerlper)
+        public PedidosMeseroController(DataContext context, ICombosHelper combosHerlper)
         {
             _context = context;
             _combosHerlper = combosHerlper;
@@ -35,16 +36,7 @@ namespace OvejaNegra.Controllers
             return View(model);
         }
 
-        // GET: Pedidos
-        public IActionResult IndexTodos()
-        {
-            var fecha = DateTimeOffset.Now.ToOffset(new TimeSpan(-4, 0, 0)).Date;
-
-            //var model = _context.Pedidos.Include(p => p.Comandas).Where(f => f.Fecha.Date == fecha).Where(c => c.Cerrado == false).ToList();
-
-            var model = _context.Pedidos.Include(p => p.Comandas).Where(f => f.Fecha.Date == fecha).ToList();
-            return View(model);
-        }
+       
 
         // GET: Pedidos/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -91,7 +83,7 @@ namespace OvejaNegra.Controllers
                 _context.Add(model);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("AddComanda", "Pedidos", new { id = model.Id });
+                return RedirectToAction("AddComanda", "PedidosMesero", new { id = model.Id });
                 //return RedirectToAction(nameof(Index));
             }
             return View(model);
@@ -143,7 +135,7 @@ namespace OvejaNegra.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index", "Pedidos");
+                return RedirectToAction("Index", "PedidosMesero");
             }
             return View(pedido);
         }
@@ -246,7 +238,7 @@ namespace OvejaNegra.Controllers
                 _context.Update(pedido);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("AddComanda", "Pedidos", new { id = model.PedidoId });
+                return RedirectToAction("AddComanda", "PedidosMesero", new { id = model.PedidoId });
 
 
 
@@ -290,7 +282,7 @@ namespace OvejaNegra.Controllers
             _context.Update(pedido);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Details", "Pedidos", new { id = comanda.Pedido.Id });
+            return RedirectToAction("Details", "PedidosMesero", new { id = comanda.Pedido.Id });
 
         }
 
@@ -390,13 +382,10 @@ namespace OvejaNegra.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details", "Pedidos", new { id = model.PedidoId });
+                return RedirectToAction("Details", "PedidosMesero", new { id = model.PedidoId });
             }
             return View(model);
         }
 
     }
-
-
 }
-
