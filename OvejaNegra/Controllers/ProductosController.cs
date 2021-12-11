@@ -21,7 +21,7 @@ namespace OvejaNegra.Controllers
         // GET: Productos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Productos.ToListAsync());
+            return View(await _context.Productos.OrderBy(d=>d.Categoria).ThenBy(c=>c.Nombre).ToListAsync());
         }
 
         // GET: Productos/Details/5

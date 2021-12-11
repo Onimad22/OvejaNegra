@@ -380,6 +380,11 @@ namespace OvejaNegra.Controllers
             return RedirectToAction("Details", "Empleados", new { id = id });
         }
 
+        // GET: SueldosPago
+        public async Task<IActionResult> VerSueldos()
+        {
+            return View(await _context.SueldosPago.Include(e => e.Empleado).ToListAsync());
+        }
 
     }
 }
